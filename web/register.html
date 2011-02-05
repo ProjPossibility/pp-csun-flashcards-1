@@ -6,14 +6,14 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <!-- #BeginEditable "doctitle" -->
-<title>Home</title>
+<title>Register</title>
 <!-- #EndEditable -->
 </head>
 
 <body>
 <!-- #BeginEditable "header" -->
 <div>
-	<h1>SS12: CSUN Flashcards</h1>
+	<h1>Register</h1>
 </div>
 <!-- #EndEditable -->
 
@@ -23,18 +23,36 @@
 	| <a href="login.html">LOGIN</a><br />
 </div>
 <!-- #BeginEditable "body" -->
-<div><br />
-	A web-based flashcard solution could be accessible on multiple platforms and 
-	could support math and other complex equations. This would be quite 
-	beneficial to a person with a cognitive or learning disability. For example 
-	a user could create a set of flashcards of mathematic equations conveniently 
-	on their computer. The user can then access and edit the flash cards from 
-	their mobile device, eliminating the need for physical cards. <br />
-	<br />
-	Google Code site: <a href="http://code.google.com/p/pp-csun-flashcards-1/">
-	http://code.google.com/p/pp-csun-flashcards-1/</a><br />
-	<br />
-	SVN: <strong><em>https://pp-csun-flashcards-1.googlecode.com/svn/trunk/</em></strong><br />
+<div>
+<form name="input" action="register.php" method="POST">
+<table>
+    <tr>
+        <td>
+            Username:
+        </td>
+        <td>
+            <input type="text" name="username" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Password:
+        </td>
+        <td>
+            <input type="password" name="password" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="submit" value="Submit" />
+        </td>
+        <td>
+            <input type="reset" value="Reset" />
+        </td>
+    </tr>
+</table>
+</form>
+
 </div>
 <!-- #EndEditable -->
 

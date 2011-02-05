@@ -15,7 +15,8 @@
 
 <div id="navigation" align="center">
 	<a href="index.html">HOME</a> | <a href="create_flashcard.html">CREATE</a> |
-	<a href="view_flashcard.php">VIEW</a> | <a href="login.html">LOGIN</a><br />
+	<a href="view_flashcard.php">VIEW</a> | <a href="register.html">REGISTER</a> 
+	| <a href="login.html">LOGIN</a><br />
 </div>
 <!-- #BeginEditable "body" -->
 <div></div>
