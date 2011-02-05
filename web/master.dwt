@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<!-- #BeginEditable "doctitle" -->
+<title>CSUN Flashcards</title>
+<!-- #EndEditable -->
+</head>
+
+<body>
+<!-- #BeginEditable "header" -->
+<div></div>
+<!-- #EndEditable -->
+
+<div id="navigation" align="center">
+	<a href="index.html">HOME</a> | <a href="create_flashcard.html">CREATE</a> |
+	<a href="view_flashcard.php">VIEW</a> | <a href="login.html">LOGIN</a><br />
+</div>
+<!-- #BeginEditable "body" -->
+<div></div>
+<!-- #EndEditable -->
+
+</body>
+
+</html>
