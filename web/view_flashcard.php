@@ -22,8 +22,28 @@
 	<a href="view_flashcard.php">VIEW</a> | <a href="register.html">REGISTER</a> 
 	| <a href="login.html">LOGIN</a><br />
 </div>
+
+
+<?php
+
+include('mysql.php');
+$link = mysql_connect('localhost', $mysql_user, $mysql_pass) or die('Failure to cnnect to the database ' . mysql_error());
+mysql_select_db("SS12", $link) or die("Could not connect: " . mysql_error());
+
+
+  $query = "SELECT * FROM flashcard WHERE flashcard_id = 1";
+  $result = mysql_query($query);
+  while($row=mysql_fetch_row($result)){
+  	echo $row['front'];
+  }
+?>
+
+
 <!-- #BeginEditable "body" -->
-<div></div>
+<div>
+	<br />
+	<br />
+</div>
 <!-- #EndEditable -->
 
 </body>
