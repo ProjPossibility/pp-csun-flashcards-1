@@ -7,28 +7,36 @@
 
 <body>
 <h1>Create Flashcard</h1>
-<br />
-<form action="" method="post" name="createFlashcard">
+<div align="center">
+	HOME | CREATE | VIEW</div>
+&nbsp;<form action="" method="post" name="createFlashcard">
 	
-	Category: <select name="SelectCategory">
+	<h2>Category: &nbsp;<select name="SelectCategory">
 	<option>Math</option>
 	<option>History</option>
-	</select><br />
+	</select></h2>
+	<hr />
+	<h2>Front of Card</h2>
+	Front Text:
 	<br />
-	Front:<br />
 	<textarea cols="20" name="TextAreaFlashcardFront" rows="2"></textarea><br />
 	<br />
-	Front Image:<br />
+	Front Image:
+	<br />
 	<input name="FileFlashcardFrontImage" type="file" /><br />
 	<br />
 	<br />
-	Back:<br />
+	<hr />
+	<h2>Back of Card</h2>
+	Back text:<br />
 	<textarea cols="20" name="TextAreaFlashcardBack" rows="2"></textarea><br />
 	<br />
-	Back Image:<br />
+	Back image:<br />
 	<input name="FileFlashcardBackImage" type="file" /><br />
 	<br />
-&nbsp;<input name="Reset1" type="reset" value="reset" />
+	<br />
+	<br />
+	<input name="Reset1" type="reset" value="reset" />
 	<input name="Submit1" type="submit" value="submit" />
 </form>
 
