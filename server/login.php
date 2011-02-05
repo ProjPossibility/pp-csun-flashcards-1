@@ -9,17 +9,19 @@ include('mysql.php');
 $link = mysql_connect('localhost', $mysql_user, $mysql_pass) or die('Failure to cnnect to the database ' . mysql_error());
 mysql_select_db("SS12", $link) or die("Could not connect: " . mysql_error());
 
-$query = "INSERT INTO `user` (`user_id`, `user_name`, `password`) VALUES (NULL, '$username', '$password')";
+$query = "SELECT * FROM `user` WHERE `user_name`='$username' LIMIT 1";
 
-$result = mysql_query($query) or die(mysql_error());
-if($result) {
-    echo("Account created successfull");
+$result = mysql_query($query);
+
+$row = mysql_fetch_array($result);
+
+//determine if the user's login was successful
+if($username == $row['user_name'] && $password = $row['password']) {
+    echo("Login successful");
 } else {
-    echo("Error creating account");
+    echo("Login unsuccessful");
 }
 
 mysql_close($link);
 
 ?>
-
-
