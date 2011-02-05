@@ -5,7 +5,7 @@ vti_timelastmodified:TR|05 Feb 2011 21:31:44 -0000
 vti_timecreated:TR|05 Feb 2011 20:18:33 -0000
 vti_title:SR|View Flashcard
 vti_extenderversion:SR|12.0.0.0
-vti_backlinkinfo:VX|create_flashcard.html view_flashcard.php master.dwt register.html index.html login.html
+vti_backlinkinfo:VX|create_flashcard.html view_flashcard.php master.dwt register.html index.html login.html view_flashcard.html
 vti_nexttolasttimemodified:TR|05 Feb 2011 20:40:49 -0000
 vti_cacheddtm:TX|05 Feb 2011 21:31:44 -0000
 vti_filesize:IR|869

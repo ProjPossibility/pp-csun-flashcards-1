@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- #BeginTemplate "master.dwt" -->
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<!-- #BeginEditable "doctitle" -->
+<title>View Flashcard</title>
+<!-- #EndEditable -->
+</head>
+
+<body>
+<!-- #BeginEditable "header" -->
+<div>
+	<h1>View Flashcard</h1>
+</div>
+<!-- #EndEditable -->
+
+<div id="navigation" align="center">
+	<a href="index.html">HOME</a> | <a href="create_flashcard.html">CREATE</a> |
+	<a href="view_flashcard.php">VIEW</a> | <a href="register.html">REGISTER</a> 
+	| <a href="login.html">LOGIN</a><br />
+</div>
+<!-- #BeginEditable "body" -->
+<div>
+	<form action="view_flashcard.php" method="post">
+	Category: 
+	
+	<select name="SelectCategory">
+		<option value="all">All</option>
+		<option value="math">Math</option>
+		</select><br />
+		<br />
+		Search: <input name="TextSearch" type="text" /><br />
+		<br />
+&nbsp;<input name="Submit1" type="submit" value="submit" />
+	</form>
+</div>
+<!-- #EndEditable -->
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html>
