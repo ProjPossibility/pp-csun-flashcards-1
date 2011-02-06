@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 public class Login extends Activity implements OnInitListener{
    
+	public static String userLoginId;
 	private Button btnExit;
 	private Button btnLogin;
 	private Button btnRegister;
@@ -192,6 +193,8 @@ public class Login extends Activity implements OnInitListener{
 				////////////////////////////////
 				if( login_info[2]!=null)
 					Log.d("A",login_info[2]);
+				
+				userLoginId = login_info[0];
 				Log.d("A",Boolean.toString(loginSuccess));
 				if(loginSuccess){
 					Log.d("A","Success");
