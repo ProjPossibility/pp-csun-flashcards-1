@@ -21,15 +21,22 @@ public class Register extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
-        mUserName = (EditText)this.findViewById(R.id.Register_TextView01);
-        mPassword = (EditText)this.findViewById(R.id.Register_TextView02);
+        mUserName = (EditText)this.findViewById(R.id.Register_EditTextUserName);
+        mPassword = (EditText)this.findViewById(R.id.Register_EditTextPassword);
         btnRegister = (Button)this.findViewById(R.id.Register_ButtonCreate);
         btnRegister.setOnClickListener(new OnClickListener() {
         	@Override
         	public void onClick(View v) {  
-        		/*MySQL_Connection mysql = new MySQL_Connection();        		
-        		mysql.register(mUserName.getText().toString(), mPassword.getText().toString());
-        		*/
+        		String password_MD5 ="";
+        		try {
+					password_MD5 = functions.MD5(mPassword.getText().toString());
+				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        		MySQL_Connection mysql = new MySQL_Connection();        		
+        		mysql.register(mUserName.getText().toString(), password_MD5);
+        		
         	}
         });  
     }
