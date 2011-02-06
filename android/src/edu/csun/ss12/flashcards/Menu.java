@@ -35,7 +35,7 @@ public class Menu extends Activity {
           	}
           });
        
-       btnExit = (Button)this.findViewById(R.id.Menu_ButtonCreate);
+       btnExit = (Button)this.findViewById(R.id.Menu_ButtonExit);
        btnExit.setOnClickListener(new OnClickListener() {
           	@Override
           	public void onClick(View v) {
