@@ -13,7 +13,7 @@
 
 <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Create_EditTextBack" android:singleLine="false"></EditText>
 
-<LinearLayout android:layout_width="match_parent" android:id="@+id/LinearLayout01" android:layout_height="wrap_content">
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/Create_LinearLayout01">
 <Button android:layout_height="wrap_content" android:text="Create" android:layout_width="wrap_content" android:id="@+id/Create_ButtonCreate"></Button>
 
 <Button android:layout_height="wrap_content" android:text="Reset" android:layout_width="wrap_content" android:id="@+id/Create_ButtonReset"></Button>

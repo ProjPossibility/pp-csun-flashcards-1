@@ -8,5 +8,7 @@
 <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Register_EditTextUserName"></EditText><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Password:" android:id="@+id/Register_TextView03"></TextView>
 
 <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Register_EditTextPassword"></EditText>
-<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Create Account" android:id="@+id/Register_ButtonCreate"></Button>
+<Button android:text="Create Account" android:layout_height="wrap_content" android:id="@+id/Register_ButtonCreate" android:layout_width="wrap_content"></Button>
+
+
 </LinearLayout>
