@@ -9,5 +9,5 @@
     android:layout_height="wrap_content" android:text="Main Menu"/>
 <Button android:layout_height="wrap_content" android:text="Browse" android:layout_width="fill_parent" android:id="@+id/Menu_ButtonBrowse"></Button>
 <Button android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="Create Flashcard" android:id="@+id/Menu_ButtonCreate"></Button>
-<Button android:layout_height="wrap_content" android:text="Exit" android:layout_width="fill_parent" android:id="@+id/Menu_ButtonExit"></Button>
+<Button android:layout_height="wrap_content" android:text="Sign Out" android:layout_width="fill_parent" android:id="@+id/Menu_ButtonExit"></Button>
 </LinearLayout>

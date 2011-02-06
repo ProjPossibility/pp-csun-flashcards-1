@@ -184,7 +184,8 @@ public  JSONArray getFlashCard(int user_id) {
             for(int i=0;i<jArray.length();i++){
                     JSONObject json_data = jArray.getJSONObject(i);
                     Log.i("log_tag","id: "+json_data.getInt("flashcard_id")+
-                            ", name: "+json_data.getString("front")
+                            ", front: "+json_data.getString("front")+
+                            ", back: "+json_data.getString("back")
                     );
                     //Get an output to the screen
                     returnString += "\n\t" + jArray.getJSONObject(i); 
