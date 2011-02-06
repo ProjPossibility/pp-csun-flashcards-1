@@ -8,14 +8,15 @@
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" android:text="Welcome to SS12, Flashcards"/>
 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextViewLogin" android:text="User Name:"></TextView>
-<EditText android:layout_height="wrap_content" android:id="@+id/EditTextUserName" android:layout_width="fill_parent"></EditText>
+<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Login_EditTextUserName"></EditText>
 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextViewPassword" android:text="Password:"></TextView>
-<EditText android:layout_height="wrap_content" android:id="@+id/EditTextPassword" android:password="true" android:layout_width="fill_parent"></EditText>
-<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Remember Account Info" android:id="@+id/CheckBoxSaveAccountInfo"></CheckBox>
+<EditText android:layout_height="wrap_content" android:password="true" android:layout_width="fill_parent" android:id="@+id/Login_EditTextPassword"></EditText>
+<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Remember Account Info" android:id="@+id/Login_CheckBoxSaveAccountInfo"></CheckBox>
 <LinearLayout android:id="@+id/LinearLayout01" android:layout_height="wrap_content" android:layout_width="wrap_content">
-<Button android:id="@+id/ButtonLogin" android:text="Sign In" android:layout_height="wrap_content" android:layout_width="fill_parent"></Button>
+<Button android:text="Sign In" android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Login_ButtonLogin"></Button>
 
-<Button android:layout_height="wrap_content" android:id="@+id/ButtonExit" android:text="Exit" android:layout_width="fill_parent"></Button>
+<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Register" android:id="@+id/Login_ButtonRegister"></Button><Button android:layout_height="wrap_content" android:text="Exit" android:layout_width="fill_parent" android:id="@+id/Login_ButtonExit"></Button>
+
 </LinearLayout>
 
 
