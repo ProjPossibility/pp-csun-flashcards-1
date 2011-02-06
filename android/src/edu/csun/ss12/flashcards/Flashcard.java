@@ -35,6 +35,8 @@ public class Flashcard extends Activity {
         
         // check box save account info
         if( preferences.getBoolean("saveAccountInfo", false) == true) { 
+        	mUserName.setText(preferences.getString("userName", ""));
+        	mPassword.setText(preferences.getString("password", ""));
         	mSaveInfo.setChecked(true);
         	editor.putBoolean("saveAccountInfo", true);
         	editor.commit();
