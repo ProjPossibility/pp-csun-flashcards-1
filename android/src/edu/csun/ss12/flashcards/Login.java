@@ -44,11 +44,13 @@ public class Login extends Activity implements OnInitListener{
 
         SharedPreferences preferences = this.getSharedPreferences(PREFERENCES, MODE_PRIVATE);
         final SharedPreferences.Editor editor = preferences.edit();
+        
         //Text-to-Speech
         Intent checkIntent = new Intent();
     	checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
     	startActivityForResult(checkIntent, 0);
     	tts = new TextToSpeech(this, this);
+    	
         // initalize layout
         mUserName = (EditText)this.findViewById(R.id.Login_EditTextUserName);
         mPassword = (EditText)this.findViewById(R.id.Login_EditTextPassword);
