@@ -1,6 +1,7 @@
 package edu.csun.ss12.flashcards;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,16 +11,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.OnInitListener;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Login extends Activity {
+public class Login extends Activity implements OnInitListener{
    
 	private Button btnExit;
 	private Button btnLogin;
@@ -28,6 +32,8 @@ public class Login extends Activity {
 	private EditText mPassword;
 	private CheckBox mSaveInfo;
 	final static String PREFERENCES = "FlashcardPreferences";
+	private int MY_DATA_CHECK_CODE = 0;
+	private TextToSpeech tts;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -37,7 +43,11 @@ public class Login extends Activity {
 
         SharedPreferences preferences = this.getSharedPreferences(PREFERENCES, MODE_PRIVATE);
         final SharedPreferences.Editor editor = preferences.edit();
-        
+        //Text-to-Speech
+        Intent checkIntent = new Intent();
+    	checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+    	startActivityForResult(checkIntent, 0);
+    	tts = new TextToSpeech(this, this);
         // initalize layout
         mUserName = (EditText)this.findViewById(R.id.Login_EditTextUserName);
         mPassword = (EditText)this.findViewById(R.id.Login_EditTextPassword);
@@ -46,7 +56,90 @@ public class Login extends Activity {
         btnLogin = (Button)this.findViewById(R.id.Login_ButtonLogin);
         btnRegister = (Button)this.findViewById(R.id.Login_ButtonRegister);
         
-        
+        //Select username textbox
+        mUserName.setOnFocusChangeListener(new OnFocusChangeListener(){
+
+			@Override
+			public void onFocusChange(View arg0, boolean gainFocus) {
+				// TODO Auto-generated method stub
+				if(gainFocus){
+					String speech1 = "Username";
+			    	tts.setLanguage(Locale.US);
+			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+				}
+			}
+        	
+        });
+      //Select password textbox
+        mPassword.setOnFocusChangeListener(new OnFocusChangeListener(){
+
+			@Override
+			public void onFocusChange(View arg0, boolean gainFocus) {
+				// TODO Auto-generated method stub
+				if(gainFocus){
+					String speech1 = "Password";
+			    	tts.setLanguage(Locale.US);
+			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+				}
+			}
+        	
+        });
+        //Select Info checkbox
+        mSaveInfo.setOnFocusChangeListener(new OnFocusChangeListener(){
+
+			@Override
+			public void onFocusChange(View arg0, boolean gainFocus) {
+				// TODO Auto-generated method stub
+				if(gainFocus){
+					String speech1 = "Remember Account Info";
+			    	tts.setLanguage(Locale.US);
+			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+				}
+			}
+        	
+        });
+      //Select Sign In
+        btnLogin.setOnFocusChangeListener(new OnFocusChangeListener(){
+
+			@Override
+			public void onFocusChange(View arg0, boolean gainFocus) {
+				// TODO Auto-generated method stub
+				if(gainFocus){
+					String speech1 = "Sign in";
+			    	tts.setLanguage(Locale.US);
+			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+				}
+			}
+        	
+        });
+      //Select Register
+        btnRegister.setOnFocusChangeListener(new OnFocusChangeListener(){
+
+			@Override
+			public void onFocusChange(View arg0, boolean gainFocus) {
+				// TODO Auto-generated method stub
+				if(gainFocus){
+					String speech1 = "Register";
+			    	tts.setLanguage(Locale.US);
+			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+				}
+			}
+        	
+        });
+      //Select Exit
+        btnExit.setOnFocusChangeListener(new OnFocusChangeListener(){
+
+			@Override
+			public void onFocusChange(View arg0, boolean gainFocus) {
+				// TODO Auto-generated method stub
+				if(gainFocus){
+					String speech1 = "Exit";
+			    	tts.setLanguage(Locale.US);
+			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+				}
+			}
+        	
+        });
         // Exit button listener
         btnExit.setOnClickListener(new OnClickListener() {
         	@Override
@@ -91,7 +184,12 @@ public class Login extends Activity {
 				} catch (NullPointerException e) {
 					e.printStackTrace();
 				}
-				
+				//////////////////////////////
+				///test
+		   /*     String speech1 = "Sign in";
+		    	tts.setLanguage(Locale.US);
+		    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);*/
+				////////////////////////////////
 				if( login_info[2]!=null)
 					Log.d("A",login_info[2]);
 				Log.d("A",Boolean.toString(loginSuccess));
@@ -126,7 +224,7 @@ public class Login extends Activity {
         	mSaveInfo.setChecked(false);
         	editor.putBoolean("saveAccountInfo", false);
         	editor.commit();
-        }
+        }        
     }
     
 
@@ -138,5 +236,25 @@ public class Login extends Activity {
     	this.startActivity(new Intent(getBaseContext(), Register.class));
     }
     
+    @Override
+    public void onInit(int arg0) {
+    	// TODO Auto-generated method stub
+    	
+    }
+    protected void onActivityResult(
+            int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_DATA_CHECK_CODE) {
+            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                // success, create the TTS instance
+                tts = new TextToSpeech(this, this);
+            } else {
+                // missing data, install it
+                Intent installIntent = new Intent();
+                installIntent.setAction(
+                    TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(installIntent);
+            }
+        }
+    }
     
 }

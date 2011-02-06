@@ -194,5 +194,58 @@ public  JSONArray getFlashCard(int user_id) {
     }
     return jArray; 
 }    
+public  JSONArray getFrontandBack(int flashcard_id) {
+	   String returnString ="http://calqlus.org/ss12/android_getFlashCard.php";
+	   InputStream is = null;
+	    
+	   String result = "";
+	    // send
+	    ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+	    Log.e("asd",Integer.toString(flashcard_id));
+	    nameValuePairs.add(new BasicNameValuePair("flashcard_id",Integer.toString(flashcard_id)));
+
+	    //http post
+	    try{
+	            HttpClient httpclient = new DefaultHttpClient();
+	            HttpPost httppost = new HttpPost(returnString);
+	            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+	            HttpResponse response = httpclient.execute(httppost);
+	            HttpEntity entity = response.getEntity();
+	            is = entity.getContent();
+
+	    }catch(Exception e){
+	            Log.e("log_tag", "Error in http connection "+e.toString());
+	    }
+
+	    //convert response to string
+	    try{
+	            BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+	            StringBuilder sb = new StringBuilder();
+	            String line = null;
+	            while ((line = reader.readLine()) != null) {
+	                    sb.append(line + "\n");
+	            }
+	            is.close();
+	            result=sb.toString();
+	    }catch(Exception e){
+	            Log.e("log_tag", "Error converting result "+e.toString());
+	    }
+	    //parse json data
+	    JSONArray jArray = null;
+	    try{
+	            jArray = new JSONArray(result);
+	            for(int i=0;i<jArray.length();i++){
+	                    JSONObject json_data = jArray.getJSONObject(i);
+	                    Log.i("log_tag","back: "+json_data.getString("back")+
+	                            ", front: "+json_data.getString("front")
+	                    );
+	                    //Get an output to the screen
+	                    returnString += "\n\t" + jArray.getJSONObject(i); 
+	            }
+	    }catch(JSONException e){
+	            Log.e("log_tag", "Error parsing data "+e.toString());
+	    }
+	    return jArray; 
+	}    
 
 }
