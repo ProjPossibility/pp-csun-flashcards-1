@@ -26,21 +26,19 @@ import android.widget.TextView;
 
 public class MySQL_Connection {
 /** Called when the activity is first created. */
-   
-   TextView txt;
-
 public static final String KEY_121 = "http://calqlus.org/ss12/get_User_Id.php"; //i use my real ip here
 
 
 
-private String[] getLoginInfo(String returnString,int user_id) {
+public  String[] getLogin(String user_name) {
+	String returnString = KEY_121;
    String[] returnArray = new String[3]; 
    InputStream is = null;
     
    String result = "";
     // send
     ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-    nameValuePairs.add(new BasicNameValuePair("user_id",Integer.toString(user_id)));
+    nameValuePairs.add(new BasicNameValuePair("user_name",user_name));
 
     //http post
     try{
@@ -88,5 +86,61 @@ private String[] getLoginInfo(String returnString,int user_id) {
     }
     return returnArray; 
 }    
+ 	
+public  String[] getFlashCard(String flashcard_id) {
+	String returnString = KEY_121;
+   String[] returnArray = new String[3]; 
+   InputStream is = null;
     
+   String result = "";
+    // send
+    ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+    nameValuePairs.add(new BasicNameValuePair("flashcard_id",flashcard_id));
+
+    //http post
+    try{
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(KEY_121);
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            is = entity.getContent();
+
+    }catch(Exception e){
+            Log.e("log_tag", "Error in http connection "+e.toString());
+    }
+
+    //convert response to string
+    try{
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+            }
+            is.close();
+            result=sb.toString();
+    }catch(Exception e){
+            Log.e("log_tag", "Error converting result "+e.toString());
+    }
+    //parse json data
+    try{
+            JSONArray jArray = new JSONArray(result);
+            for(int i=0;i<jArray.length();i++){
+                    JSONObject json_data = jArray.getJSONObject(i);
+                    Log.i("log_tag","id: "+json_data.getInt("user_id")+
+                            ", name: "+json_data.getString("user_name")+
+                            ", sex: "+json_data.getString("password")
+                    );
+                    returnArray[0] = Integer.toString(json_data.getInt("user_id"));
+                    returnArray[1] = json_data.getString("user_name");
+                    returnArray[2] = json_data.getString("password");
+                    //Get an output to the screen
+                    returnString += "\n\t" + jArray.getJSONObject(i); 
+            }
+    }catch(JSONException e){
+            Log.e("log_tag", "Error parsing data "+e.toString());
+    }
+    return returnArray; 
+}    
 }
