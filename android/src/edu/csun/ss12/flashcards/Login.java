@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Login extends Activity {
    
@@ -70,33 +71,39 @@ public class Login extends Activity {
         			accountInfo = mPassword.getText();
         			editor.putString("password", accountInfo.toString());
         			editor.commit();
-        			
-        			/////////////////////////////
-        			MySQL_Connection mysql = new MySQL_Connection();
-        			String[] login_info = mysql.getLogin("hung");
-        			//Log.d("hung", login_info[0]);  
-        			//login_info = new String[]{"1","hung","123"};
-        			boolean loginSuccess = false;
-        			try {
-						String password_MD5 = functions.MD5(mPassword.getText().toString());
-						if(password_MD5.compareTo(login_info[2])==0) loginSuccess = true;
-						Log.d("A",password_MD5);
-					} catch (NoSuchAlgorithmException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					Log.d("A",login_info[2]);
-					Log.d("A",Boolean.toString(loginSuccess));
-					if(loginSuccess){
-						Log.d("A","Success");
-						startMenu();
-					}
-					else{
-						
-					}
-        			/////////////////////////////
-        			
         		}
+        			
+    			/////////////////////////////
+    			MySQL_Connection mysql = new MySQL_Connection();
+    			String[] login_info = mysql.getLogin( mUserName.getText().toString());
+    			//Log.d("hung", login_info[0]);  
+    			//login_info = new String[]{"1","hung","123"};
+    			boolean loginSuccess = false;
+    			try {
+					String password_MD5 = functions.MD5(mPassword.getText().toString());
+					if(password_MD5.compareTo(login_info[2])==0) loginSuccess = true;
+					Log.d("A",password_MD5);
+				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NullPointerException e) {
+					e.printStackTrace();
+				}
+				
+				if( login_info[2]!=null)
+					Log.d("A",login_info[2]);
+				Log.d("A",Boolean.toString(loginSuccess));
+				if(loginSuccess){
+					Log.d("A","Success");
+					startMenu();
+				}
+				else{
+					Toast toast = Toast.makeText(getBaseContext(), "Wrong user name or password.", 10);
+					toast.show();
+				}
+    			/////////////////////////////
+        			
+        		
         	}
         });  
         
