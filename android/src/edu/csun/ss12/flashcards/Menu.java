@@ -11,6 +11,7 @@ public class Menu extends Activity {
 	
 	Button btnCreate;
 	Button btnBrowse;
+	Button btnExit;
 
 	/** Called when the activity is first created. */
     @Override
@@ -31,6 +32,14 @@ public class Menu extends Activity {
           	@Override
           	public void onClick(View v) {
           		startCreate();
+          	}
+          });
+       
+       btnExit = (Button)this.findViewById(R.id.Menu_ButtonCreate);
+       btnExit.setOnClickListener(new OnClickListener() {
+          	@Override
+          	public void onClick(View v) {
+          		finish();
           	}
           });
         
