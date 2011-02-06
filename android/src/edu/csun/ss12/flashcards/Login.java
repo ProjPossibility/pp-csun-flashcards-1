@@ -72,8 +72,6 @@ public class Login extends Activity {
         			editor.putString("password", accountInfo.toString());
         			editor.commit();
         		}
-        			
-    			/////////////////////////////
     			MySQL_Connection mysql = new MySQL_Connection();
     			String[] login_info = mysql.getLogin( mUserName.getText().toString());
     			//Log.d("hung", login_info[0]);  
@@ -100,10 +98,7 @@ public class Login extends Activity {
 				else{
 					Toast toast = Toast.makeText(getBaseContext(), "Wrong user name or password.", 10);
 					toast.show();
-				}
-    			/////////////////////////////
-        			
-        		
+				}       		
         	}
         });  
         
