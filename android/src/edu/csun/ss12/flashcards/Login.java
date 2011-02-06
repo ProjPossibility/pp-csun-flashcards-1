@@ -1,6 +1,7 @@
 package edu.csun.ss12.flashcards;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -31,9 +32,10 @@ public class Login extends Activity {
         mUserName = (EditText)this.findViewById(R.id.EditTextUserName);
         mPassword = (EditText)this.findViewById(R.id.EditTextPassword);
         mSaveInfo = (CheckBox)this.findViewById(R.id.CheckBoxSaveAccountInfo);
+        btnExit = (Button)this.findViewById(R.id.ButtonExit);
+        btnLogin = (Button)this.findViewById(R.id.ButtonLogin);
         
-        
-        // check box save account info
+        // Check for saved user information
         if( preferences.getBoolean("saveAccountInfo", false) == true) { 
         	mUserName.setText(preferences.getString("userName", ""));
         	mPassword.setText(preferences.getString("password", ""));
@@ -47,7 +49,7 @@ public class Login extends Activity {
         }
         
         
-        btnExit = (Button)this.findViewById(R.id.ButtonExit);
+        // Exit button listener
         btnExit.setOnClickListener(new OnClickListener() {
         	@Override
         	public void onClick(View v) {
@@ -64,7 +66,7 @@ public class Login extends Activity {
         	}
         });
         
-        btnLogin = (Button)this.findViewById(R.id.ButtonLogin);
+        // Login button listener
         btnLogin.setOnClickListener(new OnClickListener() {
         	@Override
         	public void onClick(View v) {
@@ -75,8 +77,19 @@ public class Login extends Activity {
         			accountInfo = mPassword.getText();
         			editor.putString("password", accountInfo.toString());
         			editor.commit();
+        			
+        			boolean loginSuccess = true;
+        			if( loginSuccess == true ){
+        				startMenu();
+        			}
+        			
         		}
         	}
         });  
+    }
+    
+
+    public void startMenu(){
+    	this.startActivity(new Intent(getBaseContext(), Menu.class));
     }
 }
