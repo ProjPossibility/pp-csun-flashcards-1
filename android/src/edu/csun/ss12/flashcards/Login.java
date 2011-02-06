@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-public class Flashcard extends Activity {
+public class Login extends Activity {
    
 	private Button btnExit;
 	private Button btnLogin;
@@ -78,10 +78,5 @@ public class Flashcard extends Activity {
         		}
         	}
         });  
-        
-        
-        
     }
-    
-    
 }
