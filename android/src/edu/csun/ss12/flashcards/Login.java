@@ -1,10 +1,13 @@
 package edu.csun.ss12.flashcards;
 
+import java.security.NoSuchAlgorithmException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -68,10 +71,30 @@ public class Login extends Activity {
         			editor.putString("password", accountInfo.toString());
         			editor.commit();
         			
-        			boolean loginSuccess = true;
-        			if( loginSuccess == true ){
-        				startMenu();
-        			}
+        			/////////////////////////////
+        			MySQL_Connection mysql = new MySQL_Connection();
+        			String[] login_info = mysql.getLogin("hung");
+        			//Log.d("hung", login_info[0]);  
+        			//login_info = new String[]{"1","hung","123"};
+        			boolean loginSuccess = false;
+        			try {
+						String password_MD5 = functions.MD5(mPassword.getText().toString());
+						if(password_MD5.compareTo(login_info[2])==0) loginSuccess = true;
+						Log.d("A",password_MD5);
+					} catch (NoSuchAlgorithmException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					Log.d("A",login_info[2]);
+					Log.d("A",Boolean.toString(loginSuccess));
+					if(loginSuccess){
+						Log.d("A","Success");
+						startMenu();
+					}
+					else{
+						
+					}
+        			/////////////////////////////
         			
         		}
         	}
