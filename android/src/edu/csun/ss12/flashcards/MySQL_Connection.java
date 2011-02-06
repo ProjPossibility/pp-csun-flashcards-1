@@ -141,15 +141,15 @@ public  boolean register(String user_name, String password) {
     	return false;
     }
 }     	
-public  String[] getFlashCard(String flashcard_id) {
-	String returnString ="http://calqlus.org/ss12/get_User_Id.php";
-   String[] returnArray = new String[3]; 
+public  JSONArray getFlashCard(int user_id) {
+   String returnString ="http://calqlus.org/ss12/android_browse.php";
    InputStream is = null;
     
    String result = "";
     // send
     ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-    nameValuePairs.add(new BasicNameValuePair("flashcard_id",flashcard_id));
+    Log.e("asd",Integer.toString(user_id));
+    nameValuePairs.add(new BasicNameValuePair("user_id",Integer.toString(user_id)));
 
     //http post
     try{
@@ -178,23 +178,21 @@ public  String[] getFlashCard(String flashcard_id) {
             Log.e("log_tag", "Error converting result "+e.toString());
     }
     //parse json data
+    JSONArray jArray = null;
     try{
-            JSONArray jArray = new JSONArray(result);
+            jArray = new JSONArray(result);
             for(int i=0;i<jArray.length();i++){
                     JSONObject json_data = jArray.getJSONObject(i);
-                    Log.i("log_tag","id: "+json_data.getInt("user_id")+
-                            ", name: "+json_data.getString("user_name")+
-                            ", sex: "+json_data.getString("password")
+                    Log.i("log_tag","id: "+json_data.getInt("flashcard_id")+
+                            ", name: "+json_data.getString("front")
                     );
-                    returnArray[0] = Integer.toString(json_data.getInt("user_id"));
-                    returnArray[1] = json_data.getString("user_name");
-                    returnArray[2] = json_data.getString("password");
                     //Get an output to the screen
                     returnString += "\n\t" + jArray.getJSONObject(i); 
             }
     }catch(JSONException e){
             Log.e("log_tag", "Error parsing data "+e.toString());
     }
-    return returnArray; 
+    return jArray; 
 }    
+
 }
