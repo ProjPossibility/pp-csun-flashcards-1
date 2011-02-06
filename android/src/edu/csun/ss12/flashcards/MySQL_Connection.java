@@ -26,12 +26,11 @@ import android.widget.TextView;
 
 public class MySQL_Connection {
 /** Called when the activity is first created. */
-public static final String KEY_121 = "http://calqlus.org/ss12/get_User_Id.php"; //i use my real ip here
 
 
 
 public  String[] getLogin(String user_name) {
-	String returnString = KEY_121;
+	String returnString = "http://calqlus.org/ss12/get_User_Id.php";
    String[] returnArray = new String[3]; 
    InputStream is = null;
     
@@ -43,7 +42,7 @@ public  String[] getLogin(String user_name) {
     //http post
     try{
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(KEY_121);
+            HttpPost httppost = new HttpPost(returnString);
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
@@ -86,9 +85,64 @@ public  String[] getLogin(String user_name) {
     }
     return returnArray; 
 }    
- 	
+
+public  boolean register(String user_name, String password) {
+	String returnString = "http://calqlus.org/ss12/android_register.php";   
+   InputStream is = null;
+   String return_value=""; 
+   String result = "";
+    // send
+    ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+    nameValuePairs.add(new BasicNameValuePair("user_name",user_name));
+    nameValuePairs.add(new BasicNameValuePair("password",password));
+    //http post
+    try{
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(returnString);
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            is = entity.getContent();
+
+    }catch(Exception e){
+            Log.e("log_tag", "Error in http connection "+e.toString());
+    }
+
+    //convert response to string
+    try{
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+            }
+            is.close();
+            result=sb.toString();
+    }catch(Exception e){
+            Log.e("log_tag", "Error converting result "+e.toString());
+    }
+    //parse json data
+    try{
+            JSONArray jArray = new JSONArray(result);
+            for(int i=0;i<jArray.length();i++){
+                    JSONObject json_data = jArray.getJSONObject(i);                    
+                    return_value = json_data.getString("result");
+                    
+                    //Get an output to the screen
+                    returnString += "\n\t" + jArray.getJSONObject(i); 
+            }
+    }catch(JSONException e){
+            Log.e("log_tag", "Error parsing data "+e.toString());
+    }
+    if(return_value.compareTo("T")==0){
+    	return true;
+    }
+    else{
+    	return false;
+    }
+}     	
 public  String[] getFlashCard(String flashcard_id) {
-	String returnString = KEY_121;
+	String returnString ="http://calqlus.org/ss12/get_User_Id.php";
    String[] returnArray = new String[3]; 
    InputStream is = null;
     
@@ -100,7 +154,7 @@ public  String[] getFlashCard(String flashcard_id) {
     //http post
     try{
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(KEY_121);
+            HttpPost httppost = new HttpPost(returnString);
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
