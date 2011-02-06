@@ -1,12 +1,19 @@
 package edu.csun.ss12.flashcards;
 
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,6 +26,12 @@ public class Browse extends Activity {
 	TextView mBack;
 	ScrollView mScrollView;
 	LinearLayout mLinearLayout;
+	String mFlashcardFront;
+	String mFlashcardBack;
+	ArrayList<Flashcard> mFlashcardArray;
+	int index=0;
+	final String PREFERENCES = "FlashcardPreferences";
+	
 	
 	/** Called when the activity is first created. */
     @Override
@@ -37,8 +50,11 @@ public class Browse extends Activity {
 		boolean rowColor = true;
         MySQL_Connection mysql = new MySQL_Connection();
         JSONArray jArray = mysql.getFlashCard(6);
+        
+		mFlashcardArray = new ArrayList<Flashcard>();
+		
         for(int i=0;i<jArray.length();i++){
-        	
+        	this.index = i;
         	JSONObject json_data = null;
 	        try {
 	        	json_data = jArray.getJSONObject(i);
@@ -47,11 +63,17 @@ public class Browse extends Activity {
 	        }
 	
 	        try {
-	        //Log.i("log_tag","id: "+json_data.getInt("flashcard_id")+
-	        //       ", name: "+json_data.getString("front"));
-	        	
+
 				TextView mDynamicFlashcard  = new TextView(this);
-				mDynamicFlashcard.setText(json_data.getString("front"));// get front of flash card
+				mDynamicFlashcard.setId(i);
+//				mFlashcardFront =json_data.getString("front");
+//				mFlashcardBack = json_data.getString("back");
+				String front = json_data.getString("front");
+				String back = json_data.getString("back");
+				
+				mFlashcardArray.add(new Flashcard(front, back));
+				
+				mDynamicFlashcard.setText(front);// get front of flash card
 				mDynamicFlashcard.setTextSize(50);
 				mDynamicFlashcard.setClickable(true);
 				
@@ -62,16 +84,29 @@ public class Browse extends Activity {
 					mDynamicFlashcard.setBackgroundColor(Color.GRAY);
 					rowColor=true;
 				}
+
+				mDynamicFlashcard.setOnClickListener(new OnClickListener() {
+					@Override
+		        	public void onClick(View v) {
+		        		// TODO display card
+						//System.out.println(v.getId());
+				        SharedPreferences preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+				        final SharedPreferences.Editor editor = preferences.edit();
+				        String front = mFlashcardArray.get(v.getId()).getmFront();
+				        String back = mFlashcardArray.get(v.getId()).getmBack();
+				        
+						editor.putString("flashcardFront", front);
+						editor.putString("flashcardBack", back);
+						editor.commit();
+
+				    	startActivity(new Intent(getBaseContext(), DynamicFlashcard.class));
+		        	}
+		        });
 				
 				mLinearLayout.addView(mDynamicFlashcard);
-				
-				//mLinearLayout.
-				
-	            //mFront.setText(json_data.getString("front"));
 	        
 	        } catch (JSONException e) {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
+	        	e.printStackTrace();
 	        }   
 
 	        this.setContentView(mScrollView);
@@ -79,5 +114,8 @@ public class Browse extends Activity {
         	}
 
     	}
+    
+    
+
 
 	}
