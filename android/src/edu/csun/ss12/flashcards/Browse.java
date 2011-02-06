@@ -1,6 +1,7 @@
 package edu.csun.ss12.flashcards;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,15 +13,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.OnInitListener;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-public class Browse extends Activity {
+public class Browse extends Activity implements OnInitListener {
 
 	TextView mFront;
 	TextView mBack;
@@ -31,6 +35,8 @@ public class Browse extends Activity {
 	ArrayList<Flashcard> mFlashcardArray;
 	int index=0;
 	final String PREFERENCES = "FlashcardPreferences";
+	private int MY_DATA_CHECK_CODE = 0;
+	private TextToSpeech tts;
 	
 	
 	/** Called when the activity is first created. */
@@ -40,6 +46,13 @@ public class Browse extends Activity {
         // setContentView(R.layout.browse);
          // initialize text
          //mFront = (TextView)this.findViewById(R.id.Browse_TextViewFront);
+        
+        
+        //Text-to-Speech
+        Intent checkIntent = new Intent();
+     	checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+     	startActivityForResult(checkIntent, 0);
+     	tts = new TextToSpeech(this, this);
         
         mScrollView = new ScrollView(this);
         mLinearLayout = new LinearLayout(this);
@@ -84,12 +97,21 @@ public class Browse extends Activity {
 					mDynamicFlashcard.setBackgroundColor(Color.GRAY);
 					rowColor=true;
 				}
-
+				
+				mDynamicFlashcard.setOnLongClickListener(new OnLongClickListener() {
+					@Override
+					public boolean onLongClick(View v) {
+						// TODO text to speech
+				        String speech = mFlashcardArray.get(v.getId()).getmFront();
+				    	tts.setLanguage(Locale.US);
+				    	tts.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
+						return true;
+					}});
+				
 				mDynamicFlashcard.setOnClickListener(new OnClickListener() {
 					@Override
 		        	public void onClick(View v) {
 		        		// TODO display card
-						//System.out.println(v.getId());
 				        SharedPreferences preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
 				        final SharedPreferences.Editor editor = preferences.edit();
 				        String front = mFlashcardArray.get(v.getId()).getmFront();
@@ -114,6 +136,13 @@ public class Browse extends Activity {
         	}
 
     	}
+
+
+	@Override
+	public void onInit(int status) {
+		// TODO Auto-generated method stub
+		
+	}
     
     
 
