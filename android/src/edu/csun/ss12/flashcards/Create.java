@@ -1,6 +1,7 @@
 package edu.csun.ss12.flashcards;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,7 +16,10 @@ public class Create extends Activity  {
 	EditText textBack;
 	Button btnCreate;
 	Button btnReset;
+	private int mUserId;
 	
+	final String PREFERENCES = "FlashcardPreferences";
+    SharedPreferences preferences;
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,8 @@ public class Create extends Activity  {
         btnCreate = (Button)this.findViewById(R.id.Create_ButtonCreate);
         btnReset = (Button)this.findViewById(R.id.Create_ButtonReset);
         
+        preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        mUserId = preferences.getInt("userId", 6);
         
         btnCreate.setOnClickListener(new OnClickListener() {
         	@Override
