@@ -209,6 +209,7 @@ public class Login extends Activity implements OnInitListener{
 				Log.d("A",Boolean.toString(loginSuccess));
 				if(loginSuccess){
 					Log.d("A","Success");
+					Log.d("A",login_info[0]);
 					startMenu();
 				}
 				else{

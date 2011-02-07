@@ -183,7 +183,7 @@ public  JSONArray getFlashCard(int user_id) {
             jArray = new JSONArray(result);
             for(int i=0;i<jArray.length();i++){
                     JSONObject json_data = jArray.getJSONObject(i);
-                    Log.i("log_tag","id: "+json_data.getInt("flashcard_id")+
+                    Log.i("log_tag","id: "+json_data.getString("flashcard_id")+
                             ", front: "+json_data.getString("front")+
                             ", back: "+json_data.getString("back")
                     );
@@ -249,4 +249,62 @@ public  JSONArray getFrontandBack(int flashcard_id) {
 	    return jArray; 
 	}    
 
+public  boolean create(int user_id,String group_name,  String front, String back) {
+	System.out.println(group_name);
+	String returnString = "http://calqlus.org/ss12/android_Create.php";   
+   InputStream is = null;
+   String return_value=""; 
+   String result = "";
+    // send
+    ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+    nameValuePairs.add(new BasicNameValuePair("user_id",Integer.toString(user_id)));
+    nameValuePairs.add(new BasicNameValuePair("name",group_name));
+    nameValuePairs.add(new BasicNameValuePair("front",front));
+    nameValuePairs.add(new BasicNameValuePair("back", back));
+    //http post
+    try{
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(returnString);
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            is = entity.getContent();
+
+    }catch(Exception e){
+            Log.e("log_tag", "Error in http connection "+e.toString());
+    }
+
+    //convert response to string
+    try{
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+            }
+            is.close();
+            result=sb.toString();
+    }catch(Exception e){
+            Log.e("log_tag", "Error converting result "+e.toString());
+    }
+    //parse json data
+    try{
+            JSONArray jArray = new JSONArray(result);
+            for(int i=0;i<jArray.length();i++){
+                    JSONObject json_data = jArray.getJSONObject(i);                    
+                    return_value = json_data.getString("result");
+                    
+                    //Get an output to the screen
+                    returnString += "\n\t" + jArray.getJSONObject(i); 
+            }
+    }catch(JSONException e){
+            Log.e("log_tag", "Error parsing data "+e.toString());
+    }
+    if(return_value.compareTo("T")==0){
+    	return true;
+    }
+    else{
+    	return false;
+    }
+}     	
 }
