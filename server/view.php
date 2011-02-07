@@ -10,30 +10,31 @@ $group = $_GET['group'];
 
 include('mysql.php');
 include('cookieChecker.php');
+include('functions.php');
 include('latex_convert.php');
 include('/usr/home/varcvic/domains/calqlus.org/public_html/mimetex/mimetex.php');
 
-if($user_info) {
-    if($group == "") {
-        $sql = "SELECT * FROM `flashcard` WHERE `flashcard_id`='$fcID' ORDER BY flashcard_id DESC LIMIT 1";
-        $result = mysql_query($sql);
-        $row = mysql_fetch_array($result);
-        $frontText = $row['front'];
-        $backText = $row['back'];
-        $userid = $row['user_id'];
-        $group = $row['group_id'];
-    } else {
-        $sql = "SELECT * FROM `flashcard` WHERE `group_id`='$group' ORDER BY flashcard_id DESC LIMIT 1";
-        $result = mysql_query($sql);
-        $row = mysql_fetch_array($result);
-        $frontText = $row['front'];
-        $backText = $row['back'];
-        $fcID = $row['flashcard_id'];
-        $userid = $row['user_id'];   
-    }
-    if ($row['user_id'] != $user_info['user_id'])
-        die("You don't own this flashcard.");
+ForceLogin();
+
+if($group == "") {
+    $sql = "SELECT * FROM `flashcard` WHERE `flashcard_id`='$fcID' ORDER BY flashcard_id DESC LIMIT 1";
+    $result = mysql_query($sql);
+    $row = mysql_fetch_array($result);
+    $frontText = $row['front'];
+    $backText = $row['back'];
+    $userid = $row['user_id'];
+    $group = $row['group_id'];
+} else {
+    $sql = "SELECT * FROM `flashcard` WHERE `group_id`='$group' ORDER BY flashcard_id DESC LIMIT 1";
+    $result = mysql_query($sql);
+    $row = mysql_fetch_array($result);
+    $frontText = $row['front'];
+    $backText = $row['back'];
+    $fcID = $row['flashcard_id'];
+    $userid = $row['user_id'];   
 }
+if ($row['user_id'] != $user_info['user_id'])
+    die("You don't own this flashcard.");
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -57,6 +58,16 @@ function check() {
 
 </script>
 <style type="text/css">
+    A:link {text-decoration: underline; color: #fff;}
+    A:visited {text-decoration: underline; color: #fff;}
+    A:active {text-decoration: underline; color: #fff;}
+    A:hover {text-decoration: underline; color: #fff;}
+
+    A.fclink:link {text-decoration: none; color: #000;}
+    A.fclink:visited {text-decoration: none; color: #000;}
+    A.fclink:active {text-decoration: none; color: #000;}
+    A.fclink:hover {text-decoration: underline; color: #000;}
+
     body {
         background: #2e4255;
     }
@@ -136,9 +147,9 @@ function check() {
     <div id="container">
         <div id="navigation">
             <ul>
-                <li><div class="navlinks" onclick="location.href='logout.php'">Log Out</div></li>
-                <li><div class="navlinks" onclick="location.href='edit.php'">Create Flashcard</div></li>
-                <li><div class="navlinks" onclick="location.href='user-index.php'">Home</div></li>
+                <li><div class="navlinks"><a href="logout.php">Log Out</a></div></li>
+                <li><div class="navlinks"><a href="edit.php">Create Flashcard</a></div></li>
+                <li><div class="navlinks"><a href="user-index.php">Home</a></div></li>
             </ul>
         </div>
         <br /><br />
@@ -146,10 +157,14 @@ function check() {
         <?php
             if($front == "0") {
                 echo("<div class=\"fcbox\" onclick=\"location.href='view.php?fcid=".$fcID."&amp;front=1'\" title=\"Click to flip flashcard\">");
-                echo mimetex($backText);    
+                echo("<a class=\"fclink\" href=\"view.php?fcid=".$fcID."&amp;front=1\">");
+                echo mimetex($backText);
+                echo("</a>");
             } else {
                 echo("<div class=\"fcbox\" onclick=\"location.href='view.php?fcid=".$fcID."&amp;front=0'\" title=\"Click to flip flashcard\">");
+                echo("<a class=\"fclink\" href=\"view.php?fcid=".$fcID."&amp;front=0\">");
                 echo mimetex($frontText);
+                echo("</a>");
             }
             ?>
         </div>
