@@ -5,7 +5,16 @@ import android.os.Bundle;
 
 public class Flashcard  {
 
+	private String mFlashcardId;
+	
 	private String mBack;
+	private String mFront;
+	
+	public Flashcard(String front, String back, String id){
+		mFront = front;
+		mBack = back;
+		mFlashcardId = id;
+	}
 	/**
 	 * @return the mBack
 	 */
@@ -34,11 +43,20 @@ public class Flashcard  {
 		this.mFront = mFront;
 	}
 
-	private String mFront;
-	
-	public Flashcard(String front, String back){
-		mFront = front;
-		mBack = back;
+
+
+	/**
+	 * @return the mFlashcardId
+	 */
+	public String getmFlashcardId() {
+		return mFlashcardId;
+	}
+
+	/**
+	 * @param mFlashcardId the mFlashcardId to set
+	 */
+	public void setmFlashcardId(String mFlashcardId) {
+		this.mFlashcardId = mFlashcardId;
 	}
 
 	
