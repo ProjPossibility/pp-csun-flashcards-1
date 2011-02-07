@@ -55,6 +55,7 @@ public class DynamicFlashcard extends Activity implements OnInitListener  {
 		mBack = preferences.getString("flashcardBack", "Card Front");
 		mId = preferences.getString("flashcardId", "Card ID");
 		
+		
 		front.setTextSize(50);
 		front.setText(mFront);
 		front.setClickable(true);

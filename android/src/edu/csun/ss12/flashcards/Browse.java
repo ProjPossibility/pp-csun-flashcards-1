@@ -87,6 +87,10 @@ public class Browse extends Activity implements OnInitListener {
 //				mFlashcardBack = json_data.getString("back");
 				String front = json_data.getString("front");
 				String back = json_data.getString("back");
+				front = front.replaceAll("\\[math\\]", "");
+				front = front.replaceAll("\\[\\/math\\]", "");
+				back = back.replaceAll("\\[math\\]", "");
+				back = back.replaceAll("\\[\\/math\\]", "");
 				String flashcardId = json_data.getString("flashcard_id");
 				
 				mFlashcardArray.add(new Flashcard(front, back, flashcardId));
