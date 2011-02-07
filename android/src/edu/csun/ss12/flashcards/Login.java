@@ -35,15 +35,17 @@ public class Login extends Activity implements OnInitListener{
 	final static String PREFERENCES = "FlashcardPreferences";
 	private int MY_DATA_CHECK_CODE = 0;
 	private TextToSpeech tts;
-	
+    SharedPreferences preferences; 
+    SharedPreferences.Editor editor;
+    
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
-        SharedPreferences preferences = this.getSharedPreferences(PREFERENCES, MODE_PRIVATE);
-        final SharedPreferences.Editor editor = preferences.edit();
+        
+        preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        editor = preferences.edit();
         
         //Text-to-Speech
         Intent checkIntent = new Intent();
@@ -174,6 +176,14 @@ public class Login extends Activity implements OnInitListener{
         		}
     			MySQL_Connection mysql = new MySQL_Connection();
     			String[] login_info = mysql.getLogin( mUserName.getText().toString());
+    			
+    			
+    			// store user id
+    	        //preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+    	        //editor = preferences.edit();
+    			editor.putInt("userId", Integer.parseInt(login_info[0]));
+    			editor.commit();
+    			
     			//Log.d("hung", login_info[0]);  
     			//login_info = new String[]{"1","hung","123"};
     			boolean loginSuccess = false;
@@ -196,7 +206,6 @@ public class Login extends Activity implements OnInitListener{
 				if( login_info[2]!=null)
 					Log.d("A",login_info[2]);
 				
-				userLoginId = login_info[0];
 				Log.d("A",Boolean.toString(loginSuccess));
 				if(loginSuccess){
 					Log.d("A","Success");
