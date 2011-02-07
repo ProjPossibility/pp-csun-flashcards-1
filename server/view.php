@@ -140,7 +140,11 @@ function check() {
     li {
         float: right;
         list-style-type: none;
-    }    
+    }
+
+    img {
+      border: 0;
+    }
 </style>
 </head>
 <body onload="check();">

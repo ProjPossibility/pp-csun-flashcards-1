@@ -88,7 +88,9 @@ while($row = mysql_fetch_array($result)) {
         float: right;
         list-style-type: none;
     }
-    
+    img {
+        border: 0;
+    }
 </style>
 </head>
 <body>
