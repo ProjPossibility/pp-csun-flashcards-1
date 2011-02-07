@@ -14,6 +14,7 @@ public class Create extends Activity  {
 	Spinner spGroups;
 	EditText textFront;
 	EditText textBack;
+	EditText textGroup;
 	Button btnCreate;
 	Button btnReset;
 	private int mUserId;
@@ -27,6 +28,15 @@ public class Create extends Activity  {
         setContentView(R.layout.create);
         
         spGroups = (Spinner)this.findViewById(R.id.Create_SpinnerGroup);
+        textGroup = (EditText)this.findViewById(R.id.Create_EditTextGroup);
+        
+        String group = spGroups.getSelectedItem().toString();
+        System.out.println(group);
+        if (group.equals("Create Group"))
+        	textGroup.setVisibility(0); //visible
+        else
+            textGroup.setVisibility(4); //invisible
+        	
         textFront = (EditText)this.findViewById(R.id.Create_EditTextFront);
         textBack = (EditText)this.findViewById(R.id.Create_EditTextBack);
         btnCreate = (Button)this.findViewById(R.id.Create_ButtonCreate);
