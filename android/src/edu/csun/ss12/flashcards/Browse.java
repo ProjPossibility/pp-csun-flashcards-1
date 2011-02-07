@@ -62,7 +62,11 @@ public class Browse extends Activity implements OnInitListener {
 		
 		boolean rowColor = true;
         MySQL_Connection mysql = new MySQL_Connection();
-        JSONArray jArray = mysql.getFlashCard(Integer.getInteger(Login.userLoginId));
+        
+        SharedPreferences preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        JSONArray jArray = mysql.getFlashCard( preferences.getInt("userId", 6));
+
+       // JSONArray jArray = mysql.getFlashCard(6);
         
 		mFlashcardArray = new ArrayList<Flashcard>();
 		
@@ -145,6 +149,4 @@ public class Browse extends Activity implements OnInitListener {
 	}
     
     
-
-
-	}
+}
