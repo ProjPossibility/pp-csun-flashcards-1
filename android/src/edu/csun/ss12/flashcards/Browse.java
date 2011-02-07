@@ -87,8 +87,9 @@ public class Browse extends Activity implements OnInitListener {
 //				mFlashcardBack = json_data.getString("back");
 				String front = json_data.getString("front");
 				String back = json_data.getString("back");
+				String flashcardId = json_data.getString("flashcard_id");
 				
-				mFlashcardArray.add(new Flashcard(front, back));
+				mFlashcardArray.add(new Flashcard(front, back, flashcardId));
 				
 				mDynamicFlashcard.setText(front);// get front of flash card
 				mDynamicFlashcard.setTextSize(50);
@@ -120,9 +121,11 @@ public class Browse extends Activity implements OnInitListener {
 				        final SharedPreferences.Editor editor = preferences.edit();
 				        String front = mFlashcardArray.get(v.getId()).getmFront();
 				        String back = mFlashcardArray.get(v.getId()).getmBack();
+				        String id = mFlashcardArray.get(v.getId()).getmFlashcardId();
 				        
 						editor.putString("flashcardFront", front);
 						editor.putString("flashcardBack", back);
+						editor.putString("flashcardId", id);
 						editor.commit();
 
 				    	startActivity(new Intent(getBaseContext(), DynamicFlashcard.class));
