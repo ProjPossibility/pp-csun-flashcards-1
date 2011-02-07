@@ -74,7 +74,7 @@ public class Create extends Activity implements OnInitListener {
         mUserId = preferences.getInt("userId", 6);
         
         
-        spGroups.setOnItemSelectedListener(new OnItemSelectedListener(){
+       /* spGroups.setOnItemSelectedListener(new OnItemSelectedListener(){
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
@@ -87,6 +87,7 @@ public class Create extends Activity implements OnInitListener {
 		        if (group.equals("Create Group"))
 		        	textGroup.setVisibility(0); //visible
 		        else {
+		        	textGroup.s group;
 		        	textGroup.setVisibility(8); // gone
 		            // textGroup.setVisibility(4); //invisible
 		        }
@@ -110,12 +111,13 @@ public class Create extends Activity implements OnInitListener {
 			}
         });
         
-        
+        */
         btnCreate.setOnClickListener(new OnClickListener() {
         	@Override
         	public void onClick(View v) {
         		// TODO create
-        		MySQL_Connection mysql = new MySQL_Connection();        		
+        		MySQL_Connection mysql = new MySQL_Connection();   
+        		System.out.println(textGroup.getText().toString());
         		if(mysql.create(mUserId, textGroup.getText().toString(), textFront.getText().toString(), textBack.getText().toString())){
         			
         			Log.e("AWd","True");
