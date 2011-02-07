@@ -15,6 +15,7 @@ import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Modify extends Activity implements OnInitListener {
@@ -23,6 +24,7 @@ public class Modify extends Activity implements OnInitListener {
 	EditText textFront;
 	EditText textBack;
 	EditText textGroup;
+	TextView textViewGroup;
 	Button btnCreate;
 	Button btnReset;
 	private int mUserId;
@@ -36,12 +38,14 @@ public class Modify extends Activity implements OnInitListener {
     private String mId;
     
     
+    
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.modify);
         
+        textViewGroup = (TextView)this.findViewById(R.id.Modify_TextViewGroup);
         spGroups = (Spinner)this.findViewById(R.id.Modify_SpinnerGroup);
         textGroup = (EditText)this.findViewById(R.id.Modify_EditTextGroup);
         
@@ -51,6 +55,11 @@ public class Modify extends Activity implements OnInitListener {
         	textGroup.setVisibility(0); //visible
         else
             textGroup.setVisibility(4); //invisible
+    
+        // hide widgets for Hung....
+        spGroups.setVisibility(8); //gone
+        textGroup.setVisibility(8); //gone
+        textViewGroup.setVisibility(8);
         	
         textFront = (EditText)this.findViewById(R.id.Modify_EditTextFront);
         textBack = (EditText)this.findViewById(R.id.Modify_EditTextBack);

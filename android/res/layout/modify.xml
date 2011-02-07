@@ -9,7 +9,7 @@
 	  android:layout_width="fill_parent"
 	  android:layout_height="fill_parent" android:orientation="vertical">
 		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextViewTitle" android:text="Modify Flash Card"></TextView>
-		<TextView android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Group:"></TextView>
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Group:" android:id="@+id/Modify_TextViewGroup"></TextView>
 		<Spinner android:layout_height="wrap_content" android:layout_width="fill_parent" android:entries="@array/group_array" android:visibility="visible" android:id="@+id/Modify_SpinnerGroup"></Spinner>
 		
 		
