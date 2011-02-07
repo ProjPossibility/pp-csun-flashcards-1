@@ -30,6 +30,12 @@ public class Modify extends Activity implements OnInitListener {
 	private TextToSpeech tts;
 	final String PREFERENCES = "FlashcardPreferences";
     SharedPreferences preferences;
+    
+    private String mFront;
+    private String mBack;
+    private String mId;
+    
+    
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,19 @@ public class Modify extends Activity implements OnInitListener {
         btnReset = (Button)this.findViewById(R.id.Modify_ButtonReset);
         
         preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        
+    	final String PREFERENCES = "FlashcardPreferences";
+        SharedPreferences preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+       
+        // flash card info
+        mFront = preferences.getString("flashcardFront", "Card Front");
+		mBack = preferences.getString("flashcardBack", "Card Front");
+		mId = preferences.getString("flashcardId", "Card ID");
+        
+		textFront.setText(mFront);
+		textBack.setText(mBack);
+		
+		
         mUserId = preferences.getInt("userId", 6);
         
         btnCreate.setOnClickListener(new OnClickListener() {

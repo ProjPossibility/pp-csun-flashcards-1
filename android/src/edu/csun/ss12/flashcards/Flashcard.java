@@ -6,15 +6,35 @@ import android.os.Bundle;
 public class Flashcard  {
 
 	private String mFlashcardId;
-	
+	private String mGroup;
 	private String mBack;
 	private String mFront;
+	
+	/**
+	 * @return the mGroup
+	 */
+	public String getmGroup() {
+		return mGroup;
+	}
+	/**
+	 * @param mGroup the mGroup to set
+	 */
+	public void setmGroup(String mGroup) {
+		this.mGroup = mGroup;
+	}
+	public Flashcard(String front, String back, String id, String group){
+		mFront = front;
+		mBack = back;
+		mFlashcardId = id;
+		mGroup = group;
+	}
 	
 	public Flashcard(String front, String back, String id){
 		mFront = front;
 		mBack = back;
 		mFlashcardId = id;
 	}
+	
 	/**
 	 * @return the mBack
 	 */

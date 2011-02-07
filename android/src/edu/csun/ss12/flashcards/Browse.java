@@ -122,10 +122,12 @@ public class Browse extends Activity implements OnInitListener {
 				        String front = mFlashcardArray.get(v.getId()).getmFront();
 				        String back = mFlashcardArray.get(v.getId()).getmBack();
 				        String id = mFlashcardArray.get(v.getId()).getmFlashcardId();
+				       // String group = mFlashcardArray.get(v.getId()).getmGroup();
 				        
 						editor.putString("flashcardFront", front);
 						editor.putString("flashcardBack", back);
 						editor.putString("flashcardId", id);
+						//editor.putString("flashcardGroup", group);
 						editor.commit();
 
 				    	startActivity(new Intent(getBaseContext(), DynamicFlashcard.class));
