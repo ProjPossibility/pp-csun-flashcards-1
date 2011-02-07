@@ -6,10 +6,10 @@ $username=$_REQUEST['user_name'];
 $password=$_REQUEST['password'];
 if(mysql_query("INSERT INTO `user` (`user_id`, `user_name`, `password`) VALUES (NULL, '$username', '$password')"))
 {
-	echo "T"; 
+	echo "[{\"result\":\"T\"}]"; 
 }
 else{
-	echo "F";
+	echo "[{\"result\":\"F\"}]"; 
 }
 mysql_close();
 ?>

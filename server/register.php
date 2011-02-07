@@ -13,7 +13,16 @@ $query = "INSERT INTO `user` (`user_id`, `user_name`, `password`) VALUES (NULL, 
 
 $result = mysql_query($query) or die(mysql_error());
 if($result) {
-    echo("Account created successfull");
+    $query = "SELECT * FROM `user` WHERE `user_name`='$username' LIMIT 1";
+    $result = mysql_query($query);
+    $row = mysql_fetch_array($result);
+    echo("Account created successfull<br />Logging in now...");
+    $expire = time() + 60 * 60 * 24 * 30;
+    //userid cookie
+    setcookie("fcUserID", $row['user_id'], $expire); 
+    setcookie("fcPassword", $row['password'], $expire);
+    $user_info = $row;
+    echo("<meta http-equiv=\"refresh\" content=\"2;url=user-index.php\">");
 } else {
     echo("Error creating account");
 }
