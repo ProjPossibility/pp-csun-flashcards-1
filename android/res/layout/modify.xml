@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+
+
+	<LinearLayout
+	  android:layout_width="fill_parent"
+	  android:layout_height="fill_parent" android:orientation="vertical">
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextViewTitle" android:text="Modify Flash Card"></TextView>
+		<TextView android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Group:"></TextView>
+		<Spinner android:layout_height="wrap_content" android:layout_width="fill_parent" android:entries="@array/group_array" android:visibility="visible" android:id="@+id/Modify_SpinnerGroup"></Spinner>
+		
+		
+		<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Modify_EditTextGroup"></EditText><TextView android:id="@+id/TextView02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Front of Card:"></TextView>
+		<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Modify_EditTextFront"></EditText>
+		<TextView android:id="@+id/TextView03" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Back of Card:"></TextView>
+		
+		
+		<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:singleLine="false" android:id="@+id/Modify_EditTextBack"></EditText>
+		
+		<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/Modify_LinearLayout01">
+		<Button android:layout_height="wrap_content" android:text="Create" android:layout_width="wrap_content" android:id="@+id/Modify_ButtonCreate"></Button>
+		
+		<Button android:layout_height="wrap_content" android:text="Reset" android:layout_width="wrap_content" android:id="@+id/Modify_ButtonReset"></Button>
+		</LinearLayout>
+	
+
+
+</LinearLayout>
+
+</ScrollView>
