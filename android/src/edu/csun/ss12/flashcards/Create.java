@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +46,12 @@ public class Create extends Activity implements OnInitListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create);
         
+        //Text-to-Speech
+        Intent checkIntent = new Intent();
+     	checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+     	startActivityForResult(checkIntent, 0);
+     	tts = new TextToSpeech(this, this);
+     	
         spGroups = (Spinner)this.findViewById(R.id.Create_SpinnerGroup);
         textGroup = (EditText)this.findViewById(R.id.Create_EditTextGroup);
         
@@ -51,8 +59,11 @@ public class Create extends Activity implements OnInitListener {
         System.out.println(group);
         if (group.equals("Create Group"))
         	textGroup.setVisibility(0); //visible
-        else
-            textGroup.setVisibility(4); //invisible
+        else {
+        	textGroup.setVisibility(8); // gone
+            // textGroup.setVisibility(4); //invisible
+        }
+
         	
         textFront = (EditText)this.findViewById(R.id.Create_EditTextFront);
         textBack = (EditText)this.findViewById(R.id.Create_EditTextBack);
@@ -61,6 +72,44 @@ public class Create extends Activity implements OnInitListener {
         btnSpeak = (Button)this.findViewById(R.id.Create_ButtonSpeak);
         preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
         mUserId = preferences.getInt("userId", 6);
+        
+        
+        spGroups.setOnItemSelectedListener(new OnItemSelectedListener(){
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				String speech1 = spGroups.getSelectedItem().toString();
+			    tts.setLanguage(Locale.US);
+			    tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+			    
+		        String group = spGroups.getSelectedItem().toString();
+		        if (group.equals("Create Group"))
+		        	textGroup.setVisibility(0); //visible
+		        else {
+		        	textGroup.setVisibility(8); // gone
+		            // textGroup.setVisibility(4); //invisible
+		        }
+		      //  setContentView(mScrollView);
+			}
+			
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				String speech1 = spGroups.getSelectedItem().toString();
+			    tts.setLanguage(Locale.US);
+			    tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+			    
+		        String group = spGroups.getSelectedItem().toString();
+		        if (group.equals("Create Group"))
+		        	textGroup.setVisibility(0); //visible
+		        else {
+		        	textGroup.setVisibility(8); // gone
+		            // textGroup.setVisibility(4); //invisible
+		        }
+			}
+        });
+        
         
         btnCreate.setOnClickListener(new OnClickListener() {
         	@Override
@@ -91,11 +140,7 @@ public class Create extends Activity implements OnInitListener {
         		textBack.setText(""); 
         	}
         });
-      //Text-to-Speech
-        Intent checkIntent = new Intent();
-     	  checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
-     	  startActivityForResult(checkIntent, 0);
-     	  tts = new TextToSpeech(this, this);
+
      	  
      	//Select Group
      	 textGroup.setOnFocusChangeListener(new OnFocusChangeListener(){
