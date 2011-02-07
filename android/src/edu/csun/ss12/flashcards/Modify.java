@@ -88,12 +88,12 @@ public class Modify extends Activity implements OnInitListener {
         	public void onClick(View v) {
         		// TODO create
         		MySQL_Connection mysql = new MySQL_Connection();        		
-        		if(mysql.create(mUserId, textGroup.getText().toString(), textFront.getText().toString(), textBack.getText().toString())){
+        		if(mysql.modify(mId, textFront.getText().toString(), textBack.getText().toString())){
         			
         			Log.e("AWd","True");
-        			Toast toast = Toast.makeText(getBaseContext(), "Create Successfully.", 5);
+        			Toast toast = Toast.makeText(getBaseContext(), "Modify Successfully.", 5);
 					toast.show();
-					String speech1 = "Create Successfully";
+					String speech1 = "Modify Successfully";
    			    	tts.setLanguage(Locale.US);
    			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
    			    	finish();
@@ -167,7 +167,7 @@ public class Modify extends Activity implements OnInitListener {
    			public void onFocusChange(View arg0, boolean gainFocus) {
    				// TODO Auto-generated method stub
    				if(gainFocus){
-   					String speech1 = "Create";
+   					String speech1 = "Modify";
    			    	tts.setLanguage(Locale.US);
    			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
    				}

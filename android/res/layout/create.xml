@@ -24,6 +24,7 @@
 		<Button android:layout_height="wrap_content" android:text="Create" android:layout_width="wrap_content" android:id="@+id/Create_ButtonCreate"></Button>
 		
 		<Button android:layout_height="wrap_content" android:text="Reset" android:layout_width="wrap_content" android:id="@+id/Create_ButtonReset"></Button>
+		<Button android:layout_height="wrap_content" android:text="Speak" android:layout_width="wrap_content" android:id="@+id/Create_ButtonSpeak"></Button>
 		</LinearLayout>
 	
 
