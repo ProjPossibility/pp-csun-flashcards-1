@@ -67,6 +67,7 @@ public class Modify extends Activity implements OnInitListener {
 		mBack = preferences.getString("flashcardBack", "Card Front");
 		mId = preferences.getString("flashcardId", "Card ID");
         
+		// populate text fields
 		textFront.setText(mFront);
 		textBack.setText(mBack);
 		
