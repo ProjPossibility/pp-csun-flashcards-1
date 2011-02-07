@@ -2,5 +2,6 @@
 <resources>
 	<string-array name="group_array">
 		<item>Create Group</item>
+		<item>Math</item>
 	</string-array>
 </resources>

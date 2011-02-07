@@ -10,10 +10,10 @@
 	  android:layout_height="fill_parent" android:orientation="vertical">
 		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Create Flash Card" android:id="@+id/TextViewTitle"></TextView>
 		<TextView android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Group:"></TextView>
-		<Spinner android:layout_height="wrap_content" android:layout_width="fill_parent" android:entries="@array/group_array" android:id="@+id/Create_SpinnerGroup"></Spinner>
+		<Spinner android:layout_height="wrap_content" android:layout_width="fill_parent" android:entries="@array/group_array" android:id="@+id/Create_SpinnerGroup" android:visibility="visible"></Spinner>
 		
 		
-		<TextView android:id="@+id/TextView02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Front of Card:"></TextView>
+		<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Create_EditTextGroup"></EditText><TextView android:id="@+id/TextView02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Front of Card:"></TextView>
 		<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Create_EditTextFront"></EditText>
 		<TextView android:id="@+id/TextView03" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Back of Card:"></TextView>
 		
@@ -26,6 +26,7 @@
 		<Button android:layout_height="wrap_content" android:text="Reset" android:layout_width="wrap_content" android:id="@+id/Create_ButtonReset"></Button>
 		</LinearLayout>
 	
+
 
 </LinearLayout>
 
