@@ -69,7 +69,6 @@ public class Menu extends Activity implements OnInitListener{
        });
      //Select Create
        btnCreate.setOnFocusChangeListener(new OnFocusChangeListener(){
-
 			@Override
 			public void onFocusChange(View arg0, boolean gainFocus) {
 				// TODO Auto-generated method stub
@@ -79,7 +78,6 @@ public class Menu extends Activity implements OnInitListener{
 			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
 				}
 			}
-       	
        });
      //Select Sign Out
        btnExit.setOnFocusChangeListener(new OnFocusChangeListener(){
