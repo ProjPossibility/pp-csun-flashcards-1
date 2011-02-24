@@ -1,8 +1,16 @@
 package edu.csun.ss12.flashcards;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,9 +20,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
+import android.text.Html;
+import android.text.Html.ImageGetter;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -59,7 +71,6 @@ public class Browse extends Activity implements OnInitListener {
         mLinearLayout.setOrientation(LinearLayout.VERTICAL);
 		mScrollView.addView(mLinearLayout);
 		
-		
 		boolean rowColor = true;
         MySQL_Connection mysql = new MySQL_Connection();
         
@@ -83,22 +94,50 @@ public class Browse extends Activity implements OnInitListener {
 
 				TextView mDynamicFlashcard  = new TextView(this);
 				mDynamicFlashcard.setId(i);
-//				mFlashcardFront =json_data.getString("front");
-//				mFlashcardBack = json_data.getString("back");
-				String front = json_data.getString("front");
-				String back = json_data.getString("back");
-				front = front.replaceAll("\\[math\\]", "");
-				front = front.replaceAll("\\[\\/math\\]", "");
-				back = back.replaceAll("\\[math\\]", "");
-				back = back.replaceAll("\\[\\/math\\]", "");
+				mFlashcardFront =json_data.getString("front");
+				mFlashcardBack = json_data.getString("back");			
+/*				mFlashcardFront = mFlashcardFront.replaceAll("\\[math\\]", "");
+				mFlashcardFront = mFlashcardFront.replaceAll("\\[\\/math\\]", "");
+				mFlashcardBack = mFlashcardBack.replaceAll("\\[math\\]", "");
+				mFlashcardBack = mFlashcardBack.replaceAll("\\[\\/math\\]", "");
+	*/			
 				String flashcardId = json_data.getString("flashcard_id");
 				
-				mFlashcardArray.add(new Flashcard(front, back, flashcardId));
+				mFlashcardArray.add(new Flashcard(mFlashcardFront, mFlashcardBack, flashcardId));
 				
-				mDynamicFlashcard.setText(front);// get front of flash card
+				mDynamicFlashcard.setText(mFlashcardFront);// get front of flash card
 				mDynamicFlashcard.setTextSize(50);
 				mDynamicFlashcard.setClickable(true);
 				
+//Test
+				ImageGetter imgGetter = new ImageGetter() {
+	                public Drawable getDrawable(String source) {
+	                        HttpGet get = new HttpGet(source);
+	                        DefaultHttpClient client = new DefaultHttpClient();
+	                        Drawable drawable = null;
+	                        try {
+	                                HttpResponse response = client.execute(get);
+	                                InputStream stream = response.getEntity().getContent();
+	                                FileOutputStream fileout = new FileOutputStream(new File(getFilesDir()+"/test.gif"));
+	                                int read = stream.read();
+	                                while (read != -1) {
+	                                        fileout.write(read);
+	                                        read = stream.read();
+	                                }
+	                                fileout.flush();
+	                                fileout.close();
+	                                drawable = Drawable.createFromPath(getFilesDir()+"/test.gif");
+	                                drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+	                        } catch (ClientProtocolException e) {
+	                                e.printStackTrace();
+	                        } catch (IOException e) {
+	                                e.printStackTrace();
+	                        }
+	                        return drawable;
+	                }
+	        };
+		      mDynamicFlashcard.setText(Html.fromHtml(mFlashcardFront, imgGetter, null));
+//Test
 				if(rowColor==true){
 					mDynamicFlashcard.setBackgroundColor(Color.BLACK);
 					rowColor=false;
