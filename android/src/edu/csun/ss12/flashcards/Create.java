@@ -118,8 +118,7 @@ public class Create extends Activity implements OnInitListener {
         		// TODO create
         		MySQL_Connection mysql = new MySQL_Connection();   
         		System.out.println(textGroup.getText().toString());
-        		if(mysql.create(mUserId, textGroup.getText().toString(), textFront.getText().toString(), textBack.getText().toString())){
-        			
+        		if(mysql.create(mUserId, textGroup.getText().toString(), textFront.getText().toString(), textBack.getText().toString())){      			
         			Log.e("AWd","True");
         			Toast toast = Toast.makeText(getBaseContext(), "Create Successfully.", 5);
 					toast.show();

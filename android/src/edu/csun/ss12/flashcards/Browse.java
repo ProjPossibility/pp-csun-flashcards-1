@@ -27,6 +27,7 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.text.Html;
 import android.text.Html.ImageGetter;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -95,12 +96,7 @@ public class Browse extends Activity implements OnInitListener {
 				TextView mDynamicFlashcard  = new TextView(this);
 				mDynamicFlashcard.setId(i);
 				mFlashcardFront =json_data.getString("front");
-				mFlashcardBack = json_data.getString("back");			
-/*				mFlashcardFront = mFlashcardFront.replaceAll("\\[math\\]", "");
-				mFlashcardFront = mFlashcardFront.replaceAll("\\[\\/math\\]", "");
-				mFlashcardBack = mFlashcardBack.replaceAll("\\[math\\]", "");
-				mFlashcardBack = mFlashcardBack.replaceAll("\\[\\/math\\]", "");
-	*/			
+				mFlashcardBack = json_data.getString("back");				
 				String flashcardId = json_data.getString("flashcard_id");
 				
 				mFlashcardArray.add(new Flashcard(mFlashcardFront, mFlashcardBack, flashcardId));
@@ -108,15 +104,16 @@ public class Browse extends Activity implements OnInitListener {
 				mDynamicFlashcard.setText(mFlashcardFront);// get front of flash card
 				mDynamicFlashcard.setTextSize(50);
 				mDynamicFlashcard.setClickable(true);
-				
-//Test
+				mDynamicFlashcard.setTextColor(Color.WHITE);
+				mDynamicFlashcard.setGravity(Gravity.TOP);
+				// Download math equation image.
 				ImageGetter imgGetter = new ImageGetter() {
 	                public Drawable getDrawable(String source) {
 	                        HttpGet get = new HttpGet(source);
 	                        DefaultHttpClient client = new DefaultHttpClient();
 	                        Drawable drawable = null;
 	                        try {
-	                                HttpResponse response = client.execute(get);
+	                                 HttpResponse response = client.execute(get);
 	                                InputStream stream = response.getEntity().getContent();
 	                                FileOutputStream fileout = new FileOutputStream(new File(getFilesDir()+"/test.gif"));
 	                                int read = stream.read();
@@ -137,8 +134,9 @@ public class Browse extends Activity implements OnInitListener {
 	                }
 	        };
 		      mDynamicFlashcard.setText(Html.fromHtml(mFlashcardFront, imgGetter, null));
-//Test
-				if(rowColor==true){
+		      mDynamicFlashcard.setPadding(7, 7, 7, 7);
+
+		      if(rowColor==true){
 					mDynamicFlashcard.setBackgroundColor(Color.BLACK);
 					rowColor=false;
 				} else {
