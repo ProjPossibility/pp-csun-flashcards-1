@@ -15,4 +15,32 @@ public class functions {
 	        } 
 	       return sb.toString();
 		}
+		public static String getSpeech(String speech){
+			int index1 = speech.indexOf("displaystyle");
+			if (index1!=-1){
+				int index2 = speech.indexOf(" ", index1);
+				int index3 = speech.indexOf("'", index1);
+				String temp=speech.substring(index2, index3);
+				if(temp!=null) {					
+					int index4 = speech.indexOf("<img");
+					int index5 = speech.indexOf("absmiddle>");
+					String[] substrings = speech.split("<img");
+					speech ="";
+					String[] substrings1;
+					if(substrings.length==2){
+						speech = substrings[0];
+						substrings1 = substrings[1].split("absmiddle>");
+					}
+					else{
+						substrings1 = substrings[0].split("absmiddle>");
+					}
+					speech =speech + " " + temp;
+					if(substrings1.length==2){
+						speech = speech + " " + substrings1[1];						
+					}
+									}
+			}
+			return speech;
+		}
+		
 }

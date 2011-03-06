@@ -12,13 +12,47 @@
 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextViewPassword" android:text="Password:"></TextView>
 <EditText android:layout_height="wrap_content" android:password="true" android:layout_width="fill_parent" android:id="@+id/Login_EditTextPassword"></EditText>
 <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Remember Account Info" android:id="@+id/Login_CheckBoxSaveAccountInfo"></CheckBox>
-<LinearLayout android:id="@+id/LinearLayout01" android:layout_height="wrap_content" android:layout_width="wrap_content">
-<Button android:text="Sign In" android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Login_ButtonLogin"></Button>
 
-<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Register" android:id="@+id/Login_ButtonRegister"></Button><Button android:layout_height="wrap_content" android:text="Exit" android:layout_width="fill_parent" android:id="@+id/Login_ButtonExit"></Button>
-
-</LinearLayout>
-
-
-
+<TableLayout android:id="@+id/row2"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent">
+		<TableRow 
+				android:layout_weight="1" 
+				android:paddingTop="5dp" 
+				android:paddingBottom="5dp">
+				<Button android:layout_height="fill_parent" 
+						android:layout_width="fill_parent" 
+						android:text="Sign In" 
+						android:id="@+id/Login_ButtonLogin"
+						android:layout_weight="1"
+						android:background="@drawable/custom_buttom">
+						</Button>
+		</TableRow>
+		<TableRow  
+				android:layout_weight="1" 
+				android:paddingTop="5dp" 
+				android:paddingBottom="5dp">
+				<Button 
+						android:layout_width="fill_parent" 
+						android:layout_height="fill_parent" 
+						android:text="Register" 
+						android:id="@+id/Login_ButtonRegister"
+						android:layout_weight="1"
+						android:background="@drawable/custom_buttom">
+						</Button>
+		</TableRow>
+		<TableRow  
+				android:layout_weight="1" 
+				android:paddingTop="5dp" 
+				android:paddingBottom="5dp">
+				<Button 
+						android:layout_height="fill_parent" 
+						android:text="Exit" 
+						android:layout_width="fill_parent" 
+						android:id="@+id/Login_ButtonExit"
+						android:layout_weight="1"
+						android:background="@drawable/custom_buttom">
+						</Button>
+		</TableRow>
+</TableLayout>
 </LinearLayout>

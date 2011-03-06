@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
@@ -26,6 +27,10 @@ public class Menu extends Activity implements OnInitListener{
         setContentView(R.layout.menu);
         
        btnBrowse = (Button)this.findViewById(R.id.Menu_ButtonBrowse);
+       btnBrowse.setTextSize(30);
+       btnBrowse.setVerticalFadingEdgeEnabled(true);
+ //      btnBrowse.setHorizontalFadingEdgeEnabled(true);
+       btnBrowse.setFadingEdgeLength(10);
        btnBrowse.setOnClickListener(new OnClickListener() {
        	@Override
        	public void onClick(View v) {
@@ -34,6 +39,7 @@ public class Menu extends Activity implements OnInitListener{
        });
        
        btnCreate = (Button)this.findViewById(R.id.Menu_ButtonCreate);
+       btnCreate.setTextSize(30);
        btnCreate.setOnClickListener(new OnClickListener() {
           	@Override
           	public void onClick(View v) {
@@ -42,6 +48,7 @@ public class Menu extends Activity implements OnInitListener{
           });
        
        btnExit = (Button)this.findViewById(R.id.Menu_ButtonExit);
+       btnExit.setTextSize(30);
        btnExit.setOnClickListener(new OnClickListener() {
           	@Override
           	public void onClick(View v) {

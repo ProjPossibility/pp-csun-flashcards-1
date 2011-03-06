@@ -149,7 +149,9 @@ public class Browse extends Activity implements OnInitListener {
 					public boolean onLongClick(View v) {
 						// TODO text to speech
 				        String speech = mFlashcardArray.get(v.getId()).getmFront();
-				    	tts.setLanguage(Locale.US);
+				        speech = functions.getSpeech(speech);
+				        //speech.replaceAll(math, "");
+				        tts.setLanguage(Locale.US);
 				    	tts.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
 						return true;
 					}});

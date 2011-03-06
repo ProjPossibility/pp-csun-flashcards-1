@@ -2,12 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
+    android:layout_height="fill_parent" >
 <TextView  
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" android:text="Main Menu"/>
-<Button android:layout_height="wrap_content" android:text="Browse" android:layout_width="fill_parent" android:id="@+id/Menu_ButtonBrowse"></Button>
-<Button android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="Create Flashcard" android:id="@+id/Menu_ButtonCreate"></Button>
-<Button android:layout_height="wrap_content" android:text="Sign Out" android:layout_width="fill_parent" android:id="@+id/Menu_ButtonExit"></Button>
+<TableLayout android:id="@+id/row1"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent">
+	  	<TableRow  android:layout_weight="1" android:paddingTop="10dp" android:paddingBottom="10dp">	    
+			<Button android:text="Browse" 
+					android:layout_width="fill_parent" 
+					android:id="@+id/Menu_ButtonBrowse" 
+					android:layout_height="fill_parent"
+					android:layout_weight="1" 
+					android:background="@drawable/custom_buttom"></Button>
+		</TableRow>
+		<TableRow  android:layout_weight="1" android:paddingBottom="10dp" android:paddingTop="10dp">
+			<Button android:layout_height="fill_parent" 
+					android:layout_width="fill_parent" 
+					android:text="Create Flashcard" 
+					android:id="@+id/Menu_ButtonCreate"
+					android:layout_weight="1"
+					android:background="@drawable/custom_buttom"
+					></Button>
+		</TableRow>
+		<TableRow android:layout_weight="1" android:paddingBottom="10dp" android:paddingTop="10dp">
+			<Button android:layout_height="fill_parent" 
+					android:text="Sign Out" 
+					android:layout_width="fill_parent" 
+					android:id="@+id/Menu_ButtonExit"
+					android:layout_weight="1"
+					android:background="@drawable/custom_buttom"
+					></Button>
+		</TableRow>
+</TableLayout>
 </LinearLayout>
