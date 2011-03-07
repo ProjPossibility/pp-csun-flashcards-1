@@ -11,6 +11,7 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.Window;
 import android.widget.Button;
 
 public class Menu extends Activity implements OnInitListener{
@@ -24,13 +25,14 @@ public class Menu extends Activity implements OnInitListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.dashboard);
         
        btnBrowse = (Button)this.findViewById(R.id.Menu_ButtonBrowse);
-       btnBrowse.setTextSize(30);
-       btnBrowse.setVerticalFadingEdgeEnabled(true);
+ //      btnBrowse.setTextSize(30);
+ //      btnBrowse.setVerticalFadingEdgeEnabled(true);
  //      btnBrowse.setHorizontalFadingEdgeEnabled(true);
-       btnBrowse.setFadingEdgeLength(10);
+  //    btnBrowse.setFadingEdgeLength(10);
        btnBrowse.setOnClickListener(new OnClickListener() {
        	@Override
        	public void onClick(View v) {
@@ -39,7 +41,7 @@ public class Menu extends Activity implements OnInitListener{
        });
        
        btnCreate = (Button)this.findViewById(R.id.Menu_ButtonCreate);
-       btnCreate.setTextSize(30);
+ //      btnCreate.setTextSize(30);
        btnCreate.setOnClickListener(new OnClickListener() {
           	@Override
           	public void onClick(View v) {
@@ -48,7 +50,7 @@ public class Menu extends Activity implements OnInitListener{
           });
        
        btnExit = (Button)this.findViewById(R.id.Menu_ButtonExit);
-       btnExit.setTextSize(30);
+ //      btnExit.setTextSize(30);
        btnExit.setOnClickListener(new OnClickListener() {
           	@Override
           	public void onClick(View v) {
