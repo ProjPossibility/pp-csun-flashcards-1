@@ -3,15 +3,19 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" android:text="Welcome to SS12, Flashcards"/>
-<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextViewLogin" android:text="User Name:"></TextView>
+    android:background="#DFDFDF">
+    <LinearLayout style="@style/TitleBar">
+        <ImageView style="@style/TitleBarLogo"
+            android:contentDescription="@string/description_logo"
+            android:src="@drawable/title_logo" />
+        <View style="@style/TitleBarSpring" />        
+    </LinearLayout>
+
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextViewLogin" android:text="User Name:" android:textColor="#000000" android:textSize="@dimen/text_size_medium"></TextView>
 <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Login_EditTextUserName"></EditText>
-<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextViewPassword" android:text="Password:"></TextView>
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextViewPassword" android:text="Password:" android:textColor="#000000" android:textSize="@dimen/text_size_medium"></TextView>
 <EditText android:layout_height="wrap_content" android:password="true" android:layout_width="fill_parent" android:id="@+id/Login_EditTextPassword"></EditText>
-<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Remember Account Info" android:id="@+id/Login_CheckBoxSaveAccountInfo"></CheckBox>
+<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Remember Account Info" android:id="@+id/Login_CheckBoxSaveAccountInfo" android:textColor="#000000" android:textSize="@dimen/text_size_medium"></CheckBox>
 
 <TableLayout android:id="@+id/row2"
 	    android:layout_width="fill_parent"

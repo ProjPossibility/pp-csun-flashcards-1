@@ -16,6 +16,7 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
@@ -42,6 +43,7 @@ public class Login extends Activity implements OnInitListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.login);
         
         preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
