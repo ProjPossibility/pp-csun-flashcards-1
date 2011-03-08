@@ -19,26 +19,34 @@
 
 <TableLayout android:id="@+id/row2"
 	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent">
+	    android:layout_height="wrap_content">
 		<TableRow 
 				android:layout_weight="1" 
-				android:paddingTop="5dp" 
-				android:paddingBottom="5dp">
-				<Button android:layout_height="fill_parent" 
-						android:layout_width="fill_parent" 
-						android:text="Sign In" 
+				android:paddingTop="5dp"
+				android:paddingBottom="5dp">>	
+				<TextView 	android:text = " " 
+							android:layout_height="wrap_content"/>			
+				<Button  
+						android:text="Sign In"
+						android:textColor = "#ffffff"
 						android:id="@+id/Login_ButtonLogin"
 						android:layout_weight="1"
-						android:background="@drawable/custom_buttom">
-						</Button>
+						android:background="@drawable/custom_buttom" 
+						android:layout_height="wrap_content"
+						android:layout_width="fill_parent" >						
+						</Button>	
 		</TableRow>
 		<TableRow  
 				android:layout_weight="1" 
-				android:paddingTop="5dp" 
-				android:paddingBottom="5dp">
+				android:paddingTop="5dp"				 
+				android:paddingBottom="5dp">									
+				<TextView 	android:text=" " 
+							android:layout_height="wrap_content"
+							android:paddingRight="100dp"/>
 				<Button 
+						android:textColor = "#ffffff"
 						android:layout_width="fill_parent" 
-						android:layout_height="fill_parent" 
+						android:layout_height="wrap_content" 
 						android:text="Register" 
 						android:id="@+id/Login_ButtonRegister"
 						android:layout_weight="1"
@@ -49,13 +57,16 @@
 				android:layout_weight="1" 
 				android:paddingTop="5dp" 
 				android:paddingBottom="5dp">
+				<TextView 	android:text=" " 
+							android:layout_height="wrap_content"/>
 				<Button 
-						android:layout_height="fill_parent" 
+						android:textColor = "#ffffff"
+						android:layout_height="wrap_content" 
 						android:text="Exit" 
 						android:layout_width="fill_parent" 
 						android:id="@+id/Login_ButtonExit"
 						android:layout_weight="1"
-						android:background="@drawable/custom_buttom">
+						android:background="@drawable/custom_buttom" >
 						</Button>
 		</TableRow>
 </TableLayout>
