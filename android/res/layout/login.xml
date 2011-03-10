@@ -31,7 +31,7 @@
 						android:textColor = "#ffffff"
 						android:id="@+id/Login_ButtonLogin"
 						android:layout_weight="1"
-						android:background="@drawable/custom_buttom" 
+						android:background="@drawable/custom_button" 
 						android:layout_height="wrap_content"
 						android:layout_width="fill_parent" >						
 						</Button>	
@@ -50,7 +50,7 @@
 						android:text="Register" 
 						android:id="@+id/Login_ButtonRegister"
 						android:layout_weight="1"
-						android:background="@drawable/custom_buttom">
+						android:background="@drawable/custom_button">
 						</Button>
 		</TableRow>
 		<TableRow  
@@ -66,7 +66,7 @@
 						android:layout_width="fill_parent" 
 						android:id="@+id/Login_ButtonExit"
 						android:layout_weight="1"
-						android:background="@drawable/custom_buttom" >
+						android:background="@drawable/custom_button" >
 						</Button>
 		</TableRow>
 </TableLayout>

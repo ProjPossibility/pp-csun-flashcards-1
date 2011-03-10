@@ -29,10 +29,12 @@ import android.text.Html;
 import android.text.Html.ImageGetter;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -43,6 +45,10 @@ public class Browse extends Activity implements OnInitListener {
 	TextView mBack;
 	ScrollView mScrollView;
 	LinearLayout mLinearLayout;
+	LinearLayout mParentLinearLayout;
+	LinearLayout mTitleBarLinearLayout;
+	ImageView mTitleBar;
+	View mPaddingView;
 	String mFlashcardFront;
 	String mFlashcardBack;
 	ArrayList<Flashcard> mFlashcardArray;
@@ -55,6 +61,7 @@ public class Browse extends Activity implements OnInitListener {
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         // setContentView(R.layout.browse);
          // initialize text
@@ -67,19 +74,28 @@ public class Browse extends Activity implements OnInitListener {
      	startActivityForResult(checkIntent, 0);
      	tts = new TextToSpeech(this, this);
         
+     	///////////////
+     	//Layout
+     	///////////////
         mScrollView = new ScrollView(this);
         mLinearLayout = new LinearLayout(this);
         mLinearLayout.setOrientation(LinearLayout.VERTICAL);
 		mScrollView.addView(mLinearLayout);
+		mParentLinearLayout = new LinearLayout(this);
+		mTitleBarLinearLayout = new LinearLayout(this);
+		mTitleBar = new ImageView(this);
+		mPaddingView = new View(this);		
+		/////////////
+		///End Layout
+		////////////
 		
 		boolean rowColor = true;
-        MySQL_Connection mysql = new MySQL_Connection();
-        
+		//////////////////////
+		//Get data form server
+		//////////////////////
+		MySQL_Connection mysql = new MySQL_Connection();        
         SharedPreferences preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
         JSONArray jArray = mysql.getFlashCard( preferences.getInt("userId", 6));
-
-       // JSONArray jArray = mysql.getFlashCard(6);
-        
 		mFlashcardArray = new ArrayList<Flashcard>();
 		
         for(int i=0;i<jArray.length();i++){
@@ -92,16 +108,12 @@ public class Browse extends Activity implements OnInitListener {
 	        }
 	
 	        try {
-
 				TextView mDynamicFlashcard  = new TextView(this);
 				mDynamicFlashcard.setId(i);
 				mFlashcardFront =json_data.getString("front");
 				mFlashcardBack = json_data.getString("back");				
-				String flashcardId = json_data.getString("flashcard_id");
-				
+				String flashcardId = json_data.getString("flashcard_id");				
 				mFlashcardArray.add(new Flashcard(mFlashcardFront, mFlashcardBack, flashcardId));
-				
-				mDynamicFlashcard.setText(mFlashcardFront);// get front of flash card
 				mDynamicFlashcard.setTextSize(50);
 				mDynamicFlashcard.setClickable(true);
 				mDynamicFlashcard.setTextColor(Color.WHITE);
@@ -147,10 +159,8 @@ public class Browse extends Activity implements OnInitListener {
 				mDynamicFlashcard.setOnLongClickListener(new OnLongClickListener() {
 					@Override
 					public boolean onLongClick(View v) {
-						// TODO text to speech
 				        String speech = mFlashcardArray.get(v.getId()).getmFront();
 				        speech = functions.getSpeech(speech);
-				        //speech.replaceAll(math, "");
 				        tts.setLanguage(Locale.US);
 				    	tts.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
 						return true;

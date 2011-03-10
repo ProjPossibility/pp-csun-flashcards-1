@@ -9,7 +9,7 @@ public class Flashcard  {
 	private String mGroup;
 	private String mBack;
 	private String mFront;
-	
+	private int mOriginal_Index = -1 ; //Use for Search 
 	/**
 	 * @return the mGroup
 	 */
@@ -35,6 +35,12 @@ public class Flashcard  {
 		mFlashcardId = id;
 	}
 	
+	public Flashcard(String front, String back, String id, int original_id){
+		mFront = front;
+		mBack = back;
+		mFlashcardId = id;
+		mOriginal_Index = original_id;
+	}
 	/**
 	 * @return the mBack
 	 */
@@ -62,9 +68,7 @@ public class Flashcard  {
 	public void setmFront(String mFront) {
 		this.mFront = mFront;
 	}
-
-
-
+	
 	/**
 	 * @return the mFlashcardId
 	 */
@@ -77,6 +81,18 @@ public class Flashcard  {
 	 */
 	public void setmFlashcardId(String mFlashcardId) {
 		this.mFlashcardId = mFlashcardId;
+	}
+	/** 
+	 * @param mOriginal_Index
+	 */
+	public void setmOriginal_Index(int mOriginal_Index) {
+		this.mOriginal_Index = mOriginal_Index;
+	}
+	/** 
+	 * @return mOriginal_Index
+	 */
+	public int getmOriginal_Index() {
+		return mOriginal_Index;
 	}
 
 	

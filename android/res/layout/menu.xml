@@ -15,7 +15,7 @@
 					android:id="@+id/Menu_ButtonBrowse" 
 					android:layout_height="fill_parent"
 					android:layout_weight="1" 
-					android:background="@drawable/custom_buttom"></Button>
+					android:background="@drawable/custom_button"></Button>
 		</TableRow>
 		<TableRow  android:layout_weight="1" android:paddingBottom="10dp" android:paddingTop="10dp">
 			<Button android:layout_height="fill_parent" 
@@ -23,7 +23,7 @@
 					android:text="Create Flashcard" 
 					android:id="@+id/Menu_ButtonCreate"
 					android:layout_weight="1"
-					android:background="@drawable/custom_buttom"
+					android:background="@drawable/custom_button"
 					></Button>
 		</TableRow>
 		<TableRow android:layout_weight="1" android:paddingBottom="10dp" android:paddingTop="10dp">
@@ -32,7 +32,7 @@
 					android:layout_width="fill_parent" 
 					android:id="@+id/Menu_ButtonExit"
 					android:layout_weight="1"
-					android:background="@drawable/custom_buttom"
+					android:background="@drawable/custom_button"
 					></Button>
 		</TableRow>
 </TableLayout>

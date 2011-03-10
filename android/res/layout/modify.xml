@@ -1,33 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
-
-
-	<LinearLayout
-	  android:layout_width="fill_parent"
-	  android:layout_height="fill_parent" android:orientation="vertical">
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextViewTitle" android:text="Modify Flash Card"></TextView>
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Group:" android:id="@+id/Modify_TextViewGroup"></TextView>
-		<Spinner android:layout_height="wrap_content" android:layout_width="fill_parent" android:entries="@array/group_array" android:visibility="visible" android:id="@+id/Modify_SpinnerGroup"></Spinner>
-		
-		
-		<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Modify_EditTextGroup"></EditText><TextView android:id="@+id/TextView02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Front of Card:"></TextView>
-		<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Modify_EditTextFront"></EditText>
-		<TextView android:id="@+id/TextView03" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Back of Card:"></TextView>
-		
-		
-		<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:singleLine="false" android:id="@+id/Modify_EditTextBack"></EditText>
-		
-		<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/Modify_LinearLayout01">
-		<Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Modify_ButtonCreate" android:text="Modify"></Button>
-		
-		<Button android:layout_height="wrap_content" android:text="Reset" android:layout_width="wrap_content" android:id="@+id/Modify_ButtonReset"></Button>
-		</LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#DFDFDF">
+    <LinearLayout style="@style/TitleBar">
+        <ImageView style="@style/TitleBarLogo"
+            android:contentDescription="@string/description_logo"
+            android:src="@drawable/title_logo" />
+        <View style="@style/TitleBarSpring" />        
+    </LinearLayout>
 	
-
-
+	<ScrollView
+	  android:layout_width="fill_parent"
+	  android:layout_height="fill_parent">
+	
+	
+		<LinearLayout
+		  android:layout_width="fill_parent"
+		  android:layout_height="fill_parent" android:orientation="vertical">
+			<TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/TextViewTitle" android:text="Modify Flash Card" android:textColor="#000000" android:textSize="@dimen/text_size_large" android:paddingBottom="10dp" android:gravity="center_vertical|center_horizontal"></TextView>
+			<View 	
+				    android:background="@drawable/divider_gradient"
+				    android:layout_width="fill_parent"
+				    android:layout_height="1dp"
+				    android:layout_below="@+id/Modify_TextViewGroup"/>
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Group:" android:id="@+id/Modify_TextViewGroup" android:textColor="#000000" android:textSize="@dimen/text_size_medium" android:paddingTop="10dp"></TextView>
+			<Spinner android:layout_height="wrap_content" android:layout_width="fill_parent" android:entries="@array/group_array" android:visibility="visible" android:id="@+id/Modify_SpinnerGroup"></Spinner>
+			
+			
+			<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Modify_EditTextGroup"></EditText>
+			<TextView android:id="@+id/TextView02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Front of Card:" android:textColor="#000000" android:textSize="@dimen/text_size_medium" android:paddingTop="10dp"></TextView>
+			<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Modify_EditTextFront"></EditText>
+			<TextView android:id="@+id/TextView03" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Back of Card:" android:textColor="#000000" android:textSize="@dimen/text_size_medium" android:paddingTop="10dp"></TextView>
+			
+			
+			<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:singleLine="false" android:id="@+id/Modify_EditTextBack"></EditText>
+			
+			<LinearLayout 
+					android:layout_width="match_parent" 
+					android:layout_height="wrap_content"  
+					android:id="@+id/Modify_LinearLayout01"
+					android:paddingTop="10dp">
+					<Button android:layout_height="wrap_content" 
+							android:text="R" 
+							android:layout_width="wrap_content" 
+							android:id="@+id/Create_ButtonReset"							
+							android:visibility="invisible">
+							</Button>
+					<Button 
+							android:layout_height="wrap_content" 
+							android:layout_width="wrap_content" 
+							android:id="@+id/Modify_ButtonModify" 
+							android:text="Modify"							 
+							android:textColor = "#ffffff"						
+							android:background="@drawable/custom_button" 
+							android:paddingRight="10dp" 
+							android:paddingLeft="10dp"
+							android:layout_weight="1">
+							</Button>
+					<Button android:layout_height="wrap_content" 
+							android:text="R" 
+							android:layout_width="wrap_content" 
+							android:id="@+id/Create_ButtonReset"							
+							android:visibility="invisible">
+							</Button>
+					<Button 
+							android:layout_height="wrap_content" 
+							android:text="Reset" 
+							android:layout_width="wrap_content" 
+							android:id="@+id/Modify_ButtonReset"
+							android:textColor = "#ffffff"						
+							android:background="@drawable/custom_button" 
+							android:paddingRight="10dp" 
+							android:paddingLeft="10dp"
+							android:layout_weight="1">
+							</Button>
+					<Button android:layout_height="wrap_content" 
+							android:text="R" 
+							android:layout_width="wrap_content" 
+							android:id="@+id/Create_ButtonReset"							
+							android:visibility="invisible">
+							</Button>					
+			</LinearLayout>
+			<LinearLayout 
+					android:id="@+id/LinearLayout01" 
+					android:layout_width="match_parent" 
+					android:layout_height="wrap_content" 
+					android:paddingTop="10dp">
+					<Button 
+							android:text="R" 
+							android:visibility="invisible" 
+							android:id="@+id/Create_ButtonReset" 
+							android:layout_width="wrap_content" 
+							android:layout_height="wrap_content"
+							android:layout_weight="1">
+							</Button>
+					<Button 
+							android:background="@drawable/delete_button" 
+							android:paddingLeft="10dp" 
+							android:layout_weight="1" 
+							android:text="Delete" 
+							android:textColor="#ffffff" 
+							android:paddingRight="10dp" 
+							android:id="@+id/Modify_ButtonDelete" 
+							android:layout_width="wrap_content" 
+							android:layout_height="wrap_content">
+							</Button>
+					<Button 
+							android:text="R" 
+							android:visibility="invisible" 
+							android:id="@+id/Create_ButtonReset" 
+							android:layout_width="wrap_content" 
+							android:layout_height="wrap_content">
+							</Button>
+			</LinearLayout>
+	</LinearLayout>
+	
+	</ScrollView>
 </LinearLayout>
-
-</ScrollView>

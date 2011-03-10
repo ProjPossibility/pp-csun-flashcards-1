@@ -114,6 +114,7 @@ public class DynamicFlashcard extends Activity implements OnInitListener  {
 				@Override
 				public void onClick(View v) {
 					String speech1 = mFront;
+					speech1 = functions.getSpeech(speech1);
 			    	tts.setLanguage(Locale.US);
 			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
 				}
@@ -157,6 +158,7 @@ public class DynamicFlashcard extends Activity implements OnInitListener  {
 			@Override
 			public void onClick(View v) {
 				String speech1 = mBack;
+				speech1 = functions.getSpeech(speech1);
 		    	tts.setLanguage(Locale.US);
 		    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
 			}

@@ -13,12 +13,14 @@ import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class Menu extends Activity implements OnInitListener{
 	
 	Button btnCreate;
 	Button btnBrowse;
 	Button btnExit;
+	ImageButton btnSearch;
 	private int MY_DATA_CHECK_CODE = 0;
 	private TextToSpeech tts;
 	/** Called when the activity is first created. */
@@ -29,10 +31,6 @@ public class Menu extends Activity implements OnInitListener{
         setContentView(R.layout.dashboard);
         
        btnBrowse = (Button)this.findViewById(R.id.Menu_ButtonBrowse);
- //      btnBrowse.setTextSize(30);
- //      btnBrowse.setVerticalFadingEdgeEnabled(true);
- //      btnBrowse.setHorizontalFadingEdgeEnabled(true);
-  //    btnBrowse.setFadingEdgeLength(10);
        btnBrowse.setOnClickListener(new OnClickListener() {
        	@Override
        	public void onClick(View v) {
@@ -41,7 +39,6 @@ public class Menu extends Activity implements OnInitListener{
        });
        
        btnCreate = (Button)this.findViewById(R.id.Menu_ButtonCreate);
- //      btnCreate.setTextSize(30);
        btnCreate.setOnClickListener(new OnClickListener() {
           	@Override
           	public void onClick(View v) {
@@ -50,13 +47,20 @@ public class Menu extends Activity implements OnInitListener{
           });
        
        btnExit = (Button)this.findViewById(R.id.Menu_ButtonExit);
- //      btnExit.setTextSize(30);
        btnExit.setOnClickListener(new OnClickListener() {
           	@Override
           	public void onClick(View v) {
           		finish();
           	}
           });
+       btnSearch = (ImageButton)this.findViewById(R.id.Menu_ButtonSearch);
+       btnSearch.setOnClickListener(new OnClickListener(){
+		@Override
+		public void onClick(View v) {
+			startSearch();			
+		}
+    	   
+       });
      //Text-to-Speech
       Intent checkIntent = new Intent();
    	  checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
@@ -111,6 +115,10 @@ public class Menu extends Activity implements OnInitListener{
     
     public void startBrowse(){
     	this.startActivity(new Intent(getBaseContext(), Browse.class));
+    }
+    
+    public void startSearch(){
+    	this.startActivity(new Intent(getBaseContext(), Search.class));
     }
     @Override
     public void onInit(int arg0) {

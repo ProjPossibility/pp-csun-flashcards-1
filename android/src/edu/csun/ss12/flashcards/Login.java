@@ -110,7 +110,6 @@ public class Login extends Activity implements OnInitListener{
 
 			@Override
 			public void onFocusChange(View arg0, boolean gainFocus) {
-				// TODO Auto-generated method stub
 				if(gainFocus){
 					String speech1 = "Sign in";
 			    	tts.setLanguage(Locale.US);

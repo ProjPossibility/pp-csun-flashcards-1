@@ -1,34 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
-
-
-	<LinearLayout
-	  android:layout_width="fill_parent"
-	  android:layout_height="fill_parent" android:orientation="vertical">
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Create Flash Card" android:id="@+id/TextViewTitle"></TextView>
-		<TextView android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Group:"></TextView>
-		<Spinner android:layout_height="wrap_content" android:layout_width="fill_parent" android:entries="@array/group_array" android:id="@+id/Create_SpinnerGroup" android:visibility="visible"></Spinner>
-		
-		
-		<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Create_EditTextGroup"></EditText><TextView android:id="@+id/TextView02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Front of Card:"></TextView>
-		<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Create_EditTextFront"></EditText>
-		<TextView android:id="@+id/TextView03" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Back of Card:"></TextView>
-		
-		
-		<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Create_EditTextBack" android:singleLine="false"></EditText>
-		
-		<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/Create_LinearLayout01">
-		<Button android:layout_height="wrap_content" android:text="Create" android:layout_width="wrap_content" android:id="@+id/Create_ButtonCreate"></Button>
-		
-		<Button android:layout_height="wrap_content" android:text="Reset" android:layout_width="wrap_content" android:id="@+id/Create_ButtonReset"></Button>
-		<Button android:layout_height="wrap_content" android:text="Speak" android:layout_width="wrap_content" android:id="@+id/Create_ButtonSpeak"></Button>
-		</LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#DFDFDF">
+    <LinearLayout style="@style/TitleBar">
+        <ImageView style="@style/TitleBarLogo"
+            android:contentDescription="@string/description_logo"
+            android:src="@drawable/title_logo" />
+        <View style="@style/TitleBarSpring" />        
+    </LinearLayout>
 	
-
-
+	<ScrollView
+	  android:layout_width="fill_parent"
+	  android:layout_height="fill_parent">	
+		<LinearLayout
+		  android:layout_width="fill_parent"
+		  android:layout_height="fill_parent" android:orientation="vertical">
+			<TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Create Flash Card" android:id="@+id/TextViewTitle" android:textColor="#000000" android:textSize="@dimen/text_size_large" android:paddingBottom="10dp" android:gravity="center_vertical|center_horizontal"></TextView>
+			<View 	
+				    android:background="@drawable/divider_gradient"
+				    android:layout_width="fill_parent"
+				    android:layout_height="1dp"
+				    android:layout_below="@+id/TextView01"/>
+			<TextView android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Group:" android:textColor="#000000" android:textSize="@dimen/text_size_medium" android:paddingTop="10dp"></TextView>
+			<Spinner android:layout_height="wrap_content" android:layout_width="fill_parent" android:entries="@array/group_array" android:id="@+id/Create_SpinnerGroup" android:visibility="visible"></Spinner>					
+			<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Create_EditTextGroup"></EditText>
+			<TextView android:id="@+id/TextView02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Front of Card:" android:textColor="#000000" android:textSize="@dimen/text_size_medium"></TextView>
+			<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Create_EditTextFront"></EditText>
+			<TextView android:id="@+id/TextView03" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Back of Card:" android:textColor="#000000" android:textSize="@dimen/text_size_medium"></TextView>		
+			<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Create_EditTextBack" android:singleLine="false"></EditText>
+			
+			<LinearLayout 
+					android:layout_width="match_parent" 
+					android:layout_height="wrap_content" 
+					android:id="@+id/Create_LinearLayout01"
+					android:paddingTop="10dp">
+					<Button android:layout_height="wrap_content" 
+							android:text="R" 
+							android:layout_width="wrap_content" 
+							android:id="@+id/Create_ButtonReset"							
+							android:visibility="invisible">
+							</Button>	
+					<Button android:layout_height="wrap_content" 
+							android:textColor = "#ffffff"
+							android:text="Create" 
+							android:layout_width="wrap_content" 
+							android:id="@+id/Create_ButtonCreate"
+							android:background="@drawable/custom_button" 
+							android:paddingRight="10dp" 
+							android:paddingLeft="10dp"
+							android:layout_weight="1"
+							>
+							</Button>	
+					<Button android:layout_height="wrap_content" 
+							android:text="R" 
+							android:layout_width="wrap_content" 
+							android:id="@+id/Create_ButtonReset"							
+							android:visibility="invisible">
+							</Button>	
+					<Button android:layout_height="wrap_content" 
+							android:textColor = "#ffffff"
+							android:text="Reset" 
+							android:layout_width="wrap_content" 
+							android:id="@+id/Create_ButtonReset"
+							android:background="@drawable/custom_button" 
+							android:paddingLeft="10dp" 
+							android:paddingRight="10dp"
+							android:layout_weight="1">
+							</Button>
+					<Button android:layout_height="wrap_content" 
+							android:text="R" 
+							android:layout_width="wrap_content" 
+							android:id="@+id/Create_ButtonReset"							
+							android:visibility="invisible">
+							</Button>	
+			</LinearLayout>
+	</LinearLayout>
+	
+	</ScrollView>
 </LinearLayout>
-
-</ScrollView>

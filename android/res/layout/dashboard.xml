@@ -12,7 +12,8 @@
         <View style="@style/TitleBarSpring" />        
         <ImageButton style="@style/TitleBarAction"
             android:contentDescription="@string/description_search"
-            android:src="@drawable/ic_title_search"/>
+            android:src="@drawable/ic_title_search"
+            android:id = "@+id/Menu_ButtonSearch"/>
     </LinearLayout>
 
     <LinearLayout
