@@ -4,11 +4,11 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#DFDFDF">
-    <LinearLayout style="@style/TitleBar">
+    <LinearLayout style="@style/TitleBar" android:gravity="left|center_vertical">
         <ImageView style="@style/TitleBarLogo"
             android:contentDescription="@string/description_logo"
-            android:src="@drawable/logo" />
-        <View style="@style/TitleBarSpring" />        
+            android:src="@drawable/logo" 
+            android:layout_weight="1"/>     
     </LinearLayout>
 
 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextViewLogin" android:text="User Name:" android:textColor="#000000" android:textSize="@dimen/text_size_medium"></TextView>
