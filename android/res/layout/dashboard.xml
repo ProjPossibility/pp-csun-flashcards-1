@@ -5,12 +5,11 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <LinearLayout style="@style/TitleBar">
+    <LinearLayout style="@style/TitleBar" >
         <ImageView style="@style/TitleBarLogo"
             android:contentDescription="@string/description_logo"
-            android:src="@drawable/logo" />
-        <View style="@style/TitleBarSpring" />        
-        
+            android:src="@drawable/logo" 
+            android:layout_weight="1" android:paddingRight="100dp"/>  
     </LinearLayout>
 
     <LinearLayout
