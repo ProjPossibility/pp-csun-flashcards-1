@@ -65,6 +65,7 @@ public class Menu extends Activity implements OnInitListener{
        btnAbout.setOnClickListener(new OnClickListener() {
        	@Override
        	public void onClick(View v) {
+       		//ToDo :  
        	}
        });
      //Text-to-Speech
@@ -96,7 +97,7 @@ public class Menu extends Activity implements OnInitListener{
 				}
 			}
        });
-     //Select Create
+     //Select Search
        btnSearch.setOnFocusChangeListener(new OnFocusChangeListener(){
 			@Override
 			public void onFocusChange(View arg0, boolean gainFocus) {
@@ -107,7 +108,7 @@ public class Menu extends Activity implements OnInitListener{
 				}
 			}
        });
-       //Select Create
+       //Select About
        btnAbout.setOnFocusChangeListener(new OnFocusChangeListener(){
 			@Override
 			public void onFocusChange(View arg0, boolean gainFocus) {
@@ -120,20 +121,16 @@ public class Menu extends Activity implements OnInitListener{
        });
      //Select Sign Out
        btnExit.setOnFocusChangeListener(new OnFocusChangeListener(){
-
 			@Override
 			public void onFocusChange(View arg0, boolean gainFocus) {
-				// TODO Auto-generated method stub
 				if(gainFocus){
 					String speech1 = "Sign Out";
 			    	tts.setLanguage(Locale.US);
 			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
 				}
-			}
-       	
+			}       	
        });
     }
-    
     
     public void startCreate(){
     	this.startActivity(new Intent(getBaseContext(), Create.class));
@@ -148,7 +145,5 @@ public class Menu extends Activity implements OnInitListener{
     }
     @Override
     public void onInit(int arg0) {
-    	// TODO Auto-generated method stub
-    	
     }
 }

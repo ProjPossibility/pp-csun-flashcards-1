@@ -22,6 +22,7 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.text.Html;
 import android.text.Html.ImageGetter;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.View.OnLongClickListener;
@@ -33,8 +34,7 @@ public class DynamicFlashcard extends Activity implements OnInitListener  {
 
 	String mFront;
 	String mBack;
-	String mId;
-	
+	String mId;	
 	private int MY_DATA_CHECK_CODE = 0;
 	private TextToSpeech tts;
 	
@@ -44,6 +44,7 @@ public class DynamicFlashcard extends Activity implements OnInitListener  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         // setContentView(R.layout.browse);
          // initialize text
          //mFront = (TextView)this.findViewById(R.id.Browse_TextViewFront);
