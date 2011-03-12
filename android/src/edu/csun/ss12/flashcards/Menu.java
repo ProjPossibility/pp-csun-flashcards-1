@@ -18,9 +18,10 @@ import android.widget.ImageButton;
 public class Menu extends Activity implements OnInitListener{
 	
 	Button btnCreate;
+	Button btnAbout;
 	Button btnBrowse;
 	Button btnExit;
-	ImageButton btnSearch;
+	Button btnSearch;
 	private int MY_DATA_CHECK_CODE = 0;
 	private TextToSpeech tts;
 	/** Called when the activity is first created. */
@@ -53,13 +54,18 @@ public class Menu extends Activity implements OnInitListener{
           		finish();
           	}
           });
-       btnSearch = (ImageButton)this.findViewById(R.id.Menu_ButtonSearch);
+       btnSearch = (Button)this.findViewById(R.id.Menu_ButtonSearch);
        btnSearch.setOnClickListener(new OnClickListener(){
 		@Override
 		public void onClick(View v) {
 			startSearch();			
-		}
-    	   
+		}    	   
+       });
+       btnAbout = (Button)this.findViewById(R.id.Menu_ButtonAbout);
+       btnAbout.setOnClickListener(new OnClickListener() {
+       	@Override
+       	public void onClick(View v) {
+       	}
        });
      //Text-to-Speech
       Intent checkIntent = new Intent();
@@ -71,7 +77,6 @@ public class Menu extends Activity implements OnInitListener{
 
 			@Override
 			public void onFocusChange(View arg0, boolean gainFocus) {
-				// TODO Auto-generated method stub
 				if(gainFocus){
 					String speech1 = "Browse";
 			    	tts.setLanguage(Locale.US);
@@ -84,9 +89,30 @@ public class Menu extends Activity implements OnInitListener{
        btnCreate.setOnFocusChangeListener(new OnFocusChangeListener(){
 			@Override
 			public void onFocusChange(View arg0, boolean gainFocus) {
-				// TODO Auto-generated method stub
 				if(gainFocus){
 					String speech1 = "Create Flashcard";
+			    	tts.setLanguage(Locale.US);
+			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+				}
+			}
+       });
+     //Select Create
+       btnSearch.setOnFocusChangeListener(new OnFocusChangeListener(){
+			@Override
+			public void onFocusChange(View arg0, boolean gainFocus) {
+				if(gainFocus){
+					String speech1 = "Search Flashcards";
+			    	tts.setLanguage(Locale.US);
+			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+				}
+			}
+       });
+       //Select Create
+       btnAbout.setOnFocusChangeListener(new OnFocusChangeListener(){
+			@Override
+			public void onFocusChange(View arg0, boolean gainFocus) {
+				if(gainFocus){
+					String speech1 = "About us";
 			    	tts.setLanguage(Locale.US);
 			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
 				}

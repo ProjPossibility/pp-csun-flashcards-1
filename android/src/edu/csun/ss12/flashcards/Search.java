@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -19,12 +20,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.text.Html;
 import android.text.Html.ImageGetter;
 import android.text.Spanned;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -40,6 +43,7 @@ public class Search extends Activity implements OnInitListener {
 	private Button  btnSearch;
 	private EditText txtKeyword;
 	private String keyword;
+	private TextView tvNotFound;
 	final String PREFERENCES = "FlashcardPreferences";
 	private ArrayList<Flashcard> mFlashcardArray;
 	private ArrayList<Flashcard> mResult;
@@ -47,23 +51,34 @@ public class Search extends Activity implements OnInitListener {
 	private String mFlashcardBack;
 	private boolean first_time;
 	private ListView lvResult;
+	private int MY_DATA_CHECK_CODE = 0;
+	private TextToSpeech tts;
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);   
         
+        //Text-to-Speech
+        Intent checkIntent = new Intent();
+    	checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+    	startActivityForResult(checkIntent, 0);
+    	tts = new TextToSpeech(this, this);
+    	
         lvResult=(ListView)findViewById(R.id.Search_ListView);
-        first_time = true;            
+        first_time = true;   
+        tvNotFound = (TextView) this.findViewById(R.id.Search_NotFound);
         txtKeyword = (EditText) this.findViewById(R.id.Search_InputText);
         btnSearch = (Button) this.findViewById(R.id.Search_ButtonSearch);
+        
+        tvNotFound.setVisibility(android.view.View.GONE);
         btnSearch.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
+				tvNotFound.setVisibility(android.view.View.GONE);
 				keyword = txtKeyword.getText().toString();
 				mResult = new ArrayList<Flashcard>();  
-				String temp_html = "not found ";
-				String temp = new String();
 				///////////////////////////
 				//Download all flashcards (only for the first search) 
 				//////////////////////////////////////////
@@ -125,37 +140,33 @@ public class Search extends Activity implements OnInitListener {
 	        //End Handler
 	        
 		        for(int i=0;i<mFlashcardArray.size();i++){
-		        	Flashcard temp_flashcard = mFlashcardArray.get(i);
+					String temp_html = "not found ";
+					String temp_front = mFlashcardArray.get(i).getmFront();
+					String temp_back =  mFlashcardArray.get(i).getmBack();
+					String fc_id =  mFlashcardArray.get(i).getmFlashcardId();
 		        	//Remove html part		        	
-		        	/*int index_front_html_beginning = temp_flashcard.getmFront().indexOf("<img ");
-		        	int index_front_html_end = temp_flashcard.getmFront().indexOf("absmiddle>");
-		        	int index_back_html_beginning = temp_flashcard.getmBack().indexOf("<img ");
-		        	int index_back_html_end = temp_flashcard.getmBack().indexOf("absmiddle>");
+		        	int index_front_html_beginning = temp_front.indexOf("<img ");
+		        	int index_front_html_end = temp_front.indexOf("absmiddle>");
+		        	int index_back_html_beginning = temp_back.indexOf("<img ");
+		        	int index_back_html_end = temp_back.indexOf("absmiddle>");
 		        	
 		        	if((index_front_html_beginning!=-1)&&(index_front_html_end!=-1)){
-		        		temp_html = temp_flashcard.getmFront().substring(index_front_html_beginning, index_front_html_end+10);	        		
-		        		temp = temp_flashcard.getmFront();
-		        		temp = temp.replace(temp_html, " ");
-		        		System.out.println("Front : " + temp);
-		        		temp_flashcard.setmFront(temp);
-		        	}
-		        	
-		        	
+		        		temp_html = temp_front.substring(index_front_html_beginning, index_front_html_end+10);	        		
+		        		temp_front = temp_front.replace(temp_html, " ");
+		        		System.out.println("Front : " + temp_front);
+		        	}		        			        	
 		        	if((index_back_html_beginning!=-1)&&(index_back_html_end!=-1)){
-		        		temp_html = temp_flashcard.getmBack().substring(index_back_html_beginning, index_back_html_end+10);
-		        		temp = temp_flashcard.getmBack();
-		        		temp = temp.replace(temp_html, " ");
-		        		System.out.println("Back : " + temp);
-		        		temp_flashcard.setmBack(temp);
-		        	}*/
+		        		temp_html = temp_back.substring(index_back_html_beginning, index_back_html_end+10);
+		        		temp_back = temp_back.replace(temp_html, " ");
+		        		System.out.println("Back : " + temp_back);
+		        	}
 		        	// End Remove html part
-		        	if((temp_flashcard.getmFront().indexOf(keyword)!=-1)
-		        			||(temp_flashcard.getmBack().indexOf(keyword)!=-1)){
-		        		temp_flashcard.setmOriginal_Index(i);
-		        		mResult.add(temp_flashcard);
+		        	if((temp_front.indexOf(keyword)!=-1)
+		        			||(temp_back.indexOf(keyword)!=-1)){
+		        		mResult.add(new Flashcard(temp_front,temp_back,fc_id,i));
 		        	}
 		        }  
-		        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Search.this, android.R.layout.simple_list_item_1);
+		        ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(Search.this, R.drawable.list_item);
 		        lvResult.setAdapter(adapter);
 		        lvResult.setOnItemClickListener(new OnItemClickListener() {
 		            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -179,20 +190,47 @@ public class Search extends Activity implements OnInitListener {
 				      startActivity(new Intent(getBaseContext(), DynamicFlashcard.class));
 		            }
 		        });
-		        for(int i = 0; i<mResult.size();i++){
-		        	////////////////////////////////////		        	
-			      String temp_spanned = Html.fromHtml(mFlashcardArray.get(mResult.get(i).getmOriginal_Index()).getmFront(), imgGetter, null).toString();
-			     		        	/////////////////////////////////////
-		        	adapter.add(temp_spanned);		            
+		        if(mResult.size()!=0){
+			        for(int i = 0; i<mResult.size();i++){		        	
+				      Spanned temp_spanned = Html.fromHtml(mFlashcardArray.get(mResult.get(i).getmOriginal_Index()).getmFront(), imgGetter, null);
+				      adapter.add(temp_spanned);		            
+			        }
+			        adapter.notifyDataSetChanged();
+			        String speech1 = mResult.size() +" flashcards found";
+			    	tts.setLanguage(Locale.US);
+			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+			    }
+		        else{
+		        	tvNotFound.setVisibility(android.view.View.VISIBLE);
+		        	tvNotFound.setText("No results found");
+		        	String speech1 = "No results found, please try again";
+			    	tts.setLanguage(Locale.US);
+			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
 		        }
-		       /* for(int i = 0; i<Original_Data.size();i++){
-		        	////////////////////////////////////		        	
-			      
-			     
-		        	/////////////////////////////////////
-		        	adapter.add(Original_Data.get(i).getmFront());		            
-		        }*/		        
-		        adapter.notifyDataSetChanged();
+			}        	
+        });
+        
+        //Select the Edit text
+        txtKeyword.setOnFocusChangeListener(new OnFocusChangeListener(){
+			@Override
+			public void onFocusChange(View arg0, boolean gainFocus) {
+				if(gainFocus){
+					String speech1 = "please enter your search term";
+			    	tts.setLanguage(Locale.US);
+			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+				}
+			}        	
+        });
+        
+      //Select the Search Button
+        btnSearch.setOnFocusChangeListener(new OnFocusChangeListener(){
+			@Override
+			public void onFocusChange(View arg0, boolean gainFocus) {
+				if(gainFocus){
+					String speech1 = "Search";
+			    	tts.setLanguage(Locale.US);
+			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+				}
 			}        	
         });
 	}
@@ -201,6 +239,21 @@ public class Search extends Activity implements OnInitListener {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_DATA_CHECK_CODE) {
+            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                // success, create the TTS instance
+                tts = new TextToSpeech(this, this);
+            } else {
+                // missing data, install it
+                Intent installIntent = new Intent();
+                installIntent.setAction(
+                    TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(installIntent);
+            }
+        }
+    }
     
     
 }

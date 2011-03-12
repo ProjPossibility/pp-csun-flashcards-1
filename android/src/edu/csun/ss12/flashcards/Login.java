@@ -178,13 +178,18 @@ public class Login extends Activity implements OnInitListener{
     			MySQL_Connection mysql = new MySQL_Connection();
     			String[] login_info = mysql.getLogin( mUserName.getText().toString());
     			
-    			
+    			if(login_info[0]!=null){
     			// store user id
     	        //preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
     	        //editor = preferences.edit();
     			editor.putInt("userId", Integer.parseInt(login_info[0]));
     			editor.commit();
-    			
+    			}
+    			else{
+    				Toast toast = Toast.makeText(getBaseContext(), "Cannot connect server. Please check internet connection", 5);
+					toast.show();
+					finish();
+    			}
     			//Log.d("hung", login_info[0]);  
     			//login_info = new String[]{"1","hung","123"};
     			boolean loginSuccess = false;
@@ -198,12 +203,6 @@ public class Login extends Activity implements OnInitListener{
 				} catch (NullPointerException e) {
 					e.printStackTrace();
 				}
-				//////////////////////////////
-				///test
-		   /*     String speech1 = "Sign in";
-		    	tts.setLanguage(Locale.US);
-		    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);*/
-				////////////////////////////////
 				if( login_info[2]!=null)
 					Log.d("A",login_info[2]);
 				
@@ -257,8 +256,7 @@ public class Login extends Activity implements OnInitListener{
     	// TODO Auto-generated method stub
     	
     }
-    protected void onActivityResult(
-            int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == MY_DATA_CHECK_CODE) {
             if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
                 // success, create the TTS instance

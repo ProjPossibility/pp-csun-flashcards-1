@@ -7,7 +7,7 @@
     <LinearLayout style="@style/TitleBar">
         <ImageView style="@style/TitleBarLogo"
             android:contentDescription="@string/description_logo"
-            android:src="@drawable/title_logo" />
+            android:src="@drawable/logo" />
         <View style="@style/TitleBarSpring" />        
     </LinearLayout>
 	
@@ -38,8 +38,7 @@
 					android:paddingTop="10dp">
 					<Button android:layout_height="wrap_content" 
 							android:text="R" 
-							android:layout_width="wrap_content" 
-							android:id="@+id/Create_ButtonReset"							
+							android:layout_width="wrap_content"							
 							android:visibility="invisible">
 							</Button>	
 					<Button android:layout_height="wrap_content" 
@@ -55,8 +54,7 @@
 							</Button>	
 					<Button android:layout_height="wrap_content" 
 							android:text="R" 
-							android:layout_width="wrap_content" 
-							android:id="@+id/Create_ButtonReset"							
+							android:layout_width="wrap_content" 							
 							android:visibility="invisible">
 							</Button>	
 					<Button android:layout_height="wrap_content" 
@@ -71,8 +69,7 @@
 							</Button>
 					<Button android:layout_height="wrap_content" 
 							android:text="R" 
-							android:layout_width="wrap_content" 
-							android:id="@+id/Create_ButtonReset"							
+							android:layout_width="wrap_content" 							
 							android:visibility="invisible">
 							</Button>	
 			</LinearLayout>

@@ -7,7 +7,7 @@
 	<LinearLayout style="@style/TitleBar">
 	    <ImageView style="@style/TitleBarLogo"
 	        android:contentDescription="@string/description_logo"
-	        android:src="@drawable/title_logo" />
+	        android:src="@drawable/logo" />
 	    <View style="@style/TitleBarSpring" />        
 	</LinearLayout>
 	<ScrollView

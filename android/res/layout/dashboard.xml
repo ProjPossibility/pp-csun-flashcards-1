@@ -8,12 +8,9 @@
     <LinearLayout style="@style/TitleBar">
         <ImageView style="@style/TitleBarLogo"
             android:contentDescription="@string/description_logo"
-            android:src="@drawable/title_logo" />
+            android:src="@drawable/logo" />
         <View style="@style/TitleBarSpring" />        
-        <ImageButton style="@style/TitleBarAction"
-            android:contentDescription="@string/description_search"
-            android:src="@drawable/ic_title_search"
-            android:id = "@+id/Menu_ButtonSearch"/>
+        
     </LinearLayout>
 
     <LinearLayout
@@ -44,10 +41,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
-            <Button android:id="@+id/Menu_ButtonOption"
+            <Button android:id="@+id/Menu_ButtonSearch"
                 style="@style/HomeButton"
-                android:text="@string/dashboard_option"
-                android:drawableTop="@drawable/option"/>
+                android:text="@string/dashboard_search"
+                android:drawableTop="@drawable/search"/>
             <Button android:id="@+id/Menu_ButtonAbout"
                 style="@style/HomeButton"
                 android:text="@string/dashboard_about"
