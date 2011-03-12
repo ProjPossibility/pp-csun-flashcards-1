@@ -55,8 +55,7 @@ public class Browse extends Activity implements OnInitListener {
 	int index=0;
 	final String PREFERENCES = "FlashcardPreferences";
 	private int MY_DATA_CHECK_CODE = 0;
-	private TextToSpeech tts;
-	
+	private TextToSpeech tts;	
 	
 	/** Called when the activity is first created. */
     @Override
