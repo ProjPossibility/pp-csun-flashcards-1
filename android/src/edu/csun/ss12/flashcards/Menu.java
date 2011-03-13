@@ -42,8 +42,7 @@ public class Menu extends Activity implements OnInitListener{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dashboard);
         
-        //Gesture
-        
+        //Gesture        
         mLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures);
         if (!mLibrary.load()) {
             finish();
