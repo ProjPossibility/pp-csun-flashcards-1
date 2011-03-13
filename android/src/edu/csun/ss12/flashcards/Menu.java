@@ -1,10 +1,18 @@
 package edu.csun.ss12.flashcards;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.gesture.Gesture;
+import android.gesture.GestureLibraries;
+import android.gesture.GestureLibrary;
+import android.gesture.GestureOverlayView;
+import android.gesture.GestureOverlayView.OnGesturePerformedListener;
+import android.gesture.Prediction;
 import android.graphics.Color;
+import android.inputmethodservice.InputMethodService;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
@@ -12,8 +20,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.Window;
+import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class Menu extends Activity implements OnInitListener{
 	
@@ -22,6 +32,7 @@ public class Menu extends Activity implements OnInitListener{
 	Button btnBrowse;
 	Button btnExit;
 	Button btnSearch;
+	GestureLibrary mLibrary;
 	private int MY_DATA_CHECK_CODE = 0;
 	private TextToSpeech tts;
 	/** Called when the activity is first created. */
@@ -31,6 +42,28 @@ public class Menu extends Activity implements OnInitListener{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dashboard);
         
+        //Gesture
+        
+        mLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures);
+        if (!mLibrary.load()) {
+            finish();
+        }
+        GestureOverlayView gestures = (GestureOverlayView) findViewById(R.id.Menu_gestures);
+        gestures.addOnGesturePerformedListener(new OnGesturePerformedListener(){
+			@Override
+			public void onGesturePerformed(GestureOverlayView overlay,Gesture gesture) {
+				ArrayList<Prediction> predictions = mLibrary.recognize(gesture);
+			    if (predictions.size() > 0 && predictions.get(0).score > 1.0) {
+			        String action = predictions.get(0).name;
+			        if ("left_right".equals(action)) {
+			            Toast.makeText(Menu.this, "Left_Right", Toast.LENGTH_SHORT).show();
+			        } else if ("right_left".equals(action)) {
+			            Toast.makeText(Menu.this, "Right_Left", Toast.LENGTH_SHORT).show();
+			        } 
+			    }
+			}        	
+        });
+        //End Gesture
        btnBrowse = (Button)this.findViewById(R.id.Menu_ButtonBrowse);
        btnBrowse.setOnClickListener(new OnClickListener() {
        	@Override

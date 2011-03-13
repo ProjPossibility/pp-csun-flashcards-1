@@ -41,7 +41,7 @@
 			<EditText 
 				android:layout_height="wrap_content" 
 				android:layout_width="fill_parent" 
-				android:id="@+id/Register_EditTextUserName"></EditText>
+				android:id="@+id/Register_EditTextUserName" ></EditText>
 			<TextView 
 				android:layout_width="wrap_content" 
 				android:layout_height="wrap_content" 

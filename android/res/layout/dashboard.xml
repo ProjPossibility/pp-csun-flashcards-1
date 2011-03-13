@@ -1,84 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/home_root"
-    android:orientation="vertical"
+<android.gesture.GestureOverlayView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Menu_gestures"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <LinearLayout style="@style/TitleBar" >
-        <ImageView style="@style/TitleBarLogo"
-            android:contentDescription="@string/description_logo"
-            android:src="@drawable/logo" 
-            android:layout_weight="1" android:paddingRight="100dp"/>  
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="6dip" 
-        android:background="#DFDFDF">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <Button android:id="@+id/Menu_ButtonBrowse"
-                style="@style/HomeButton"
-                android:text="@string/dashboard_browse"
-                android:drawableTop="@drawable/browse"
-                />
-            <Button android:id="@+id/Menu_ButtonCreate"
-                style="@style/HomeButton"
-                android:text="@string/dashboard_create"
-                android:drawableTop="@drawable/create"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <Button android:id="@+id/Menu_ButtonSearch"
-                style="@style/HomeButton"
-                android:text="@string/dashboard_search"
-                android:drawableTop="@drawable/search"/>
-            <Button android:id="@+id/Menu_ButtonAbout"
-                style="@style/HomeButton"
-                android:text="@string/dashboard_about"
-                android:drawableTop="@drawable/about"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <Button android:id="@+id/Menu_ButtonExit"
-                style="@style/HomeButton"
-                android:text="@string/dashboard_signout"
-                android:drawableTop="@drawable/signout"/>
-            <Button android:id="@+id/action_six_button"
-                style="@style/HomeButton"
-                android:text="@string/dashboard_action"
-                android:clickable="false" android:visibility="invisible"/>
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/footer"
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/footer_height"
-        android:orientation="horizontal"
-        android:background="@color/title_background"
-        android:gravity="center">
-        
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_small"
-            android:text="@string/hello"/>
-    </LinearLayout>
-</LinearLayout>
+    android:layout_height="fill_parent"    
+    android:gestureStrokeType="multiple"
+    android:eventsInterceptionEnabled="true"
+    android:orientation="vertical">
+	<LinearLayout 
+	    android:id="@+id/home_root"
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent">
+	    <LinearLayout style="@style/TitleBar" >
+	        <ImageView style="@style/TitleBarLogo"
+	            android:contentDescription="@string/description_logo"
+	            android:src="@drawable/logo" 
+	            android:layout_weight="1" android:paddingRight="100dp"/>  
+	    </LinearLayout>
+	    <LinearLayout
+	        android:orientation="vertical"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:padding="6dip" 
+	        android:background="#DFDFDF">
+	        <LinearLayout
+	            android:orientation="horizontal"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1">
+	            <Button android:id="@+id/Menu_ButtonBrowse"
+	                style="@style/HomeButton"
+	                android:text="@string/dashboard_browse"
+	                android:drawableTop="@drawable/browse"
+	                android:nextFocusDown="@+id/Menu_ButtonCreate"
+	                />
+	            <Button android:id="@+id/Menu_ButtonCreate"
+	                style="@style/HomeButton"
+	                android:text="@string/dashboard_create"
+	                android:drawableTop="@drawable/create"/>
+	        </LinearLayout>
+	
+	        <LinearLayout
+	            android:orientation="horizontal"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1">
+	            <Button android:id="@+id/Menu_ButtonSearch"
+	                style="@style/HomeButton"
+	                android:text="@string/dashboard_search"
+	                android:drawableTop="@drawable/search"/>
+	            <Button android:id="@+id/Menu_ButtonAbout"
+	                style="@style/HomeButton"
+	                android:text="@string/dashboard_about"
+	                android:drawableTop="@drawable/about"/>
+	        </LinearLayout>
+	
+	        <LinearLayout
+	            android:orientation="horizontal"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1">
+	            <Button android:id="@+id/Menu_ButtonExit"
+	                style="@style/HomeButton"
+	                android:text="@string/dashboard_signout"
+	                android:drawableTop="@drawable/signout"/>
+	            <Button android:id="@+id/action_six_button"
+	                style="@style/HomeButton"
+	                android:text="@string/dashboard_action"
+	                android:clickable="false" android:visibility="invisible"/>
+	
+	        </LinearLayout>
+	    </LinearLayout>
+	
+	    <LinearLayout
+	        android:id="@+id/footer"
+	        android:layout_width="fill_parent"
+	        android:layout_height="@dimen/footer_height"
+	        android:orientation="horizontal"
+	        android:background="@color/title_background"
+	        android:gravity="center">
+	        
+	        <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textSize="@dimen/text_size_small"
+	            android:text="@string/hello"/>
+	    </LinearLayout>
+	</LinearLayout>
+</android.gesture.GestureOverlayView>
