@@ -3,6 +3,8 @@ package edu.csun.ss12.flashcards;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import android.app.Instrumentation;
+
 public class functions {
 		public static String MD5(String password) throws NoSuchAlgorithmException{
 	        MessageDigest md = MessageDigest.getInstance("MD5");
@@ -42,5 +44,13 @@ public class functions {
 			}
 			return speech;
 		}
+		public static void InjectKeys(final int keyEventCode) {
+	    	 new Thread(new Runnable() {
+	    	  @Override
+	    	  public void run() {
+	    	   new Instrumentation().sendKeyDownUpSync(keyEventCode);
+	    	  }
+	    	 }).start();
+	    	}
 		
 }

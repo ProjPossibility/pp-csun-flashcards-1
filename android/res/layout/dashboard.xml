@@ -6,7 +6,11 @@
     android:layout_height="fill_parent"    
     android:gestureStrokeType="multiple"
     android:eventsInterceptionEnabled="true"
-    android:orientation="vertical">
+    android:orientation="vertical"    
+	android:nextFocusDown="@+id/Menu_ButtonBrowse"
+	android:nextFocusUp="@+id/Menu_ButtonBrowse"
+	android:nextFocusLeft="@+id/Menu_ButtonBrowse"
+	android:nextFocusRight="@+id/Menu_ButtonBrowse">
 	<LinearLayout 
 	    android:id="@+id/home_root"
 	    android:orientation="vertical"
@@ -34,12 +38,17 @@
 	                style="@style/HomeButton"
 	                android:text="@string/dashboard_browse"
 	                android:drawableTop="@drawable/browse"
-	                android:nextFocusDown="@+id/Menu_ButtonCreate"
+	                android:focusable="true"
+	                android:nextFocusRight="@+id/Menu_ButtonCreate"
+	                android:nextFocusLeft="@+id/Menu_ButtonExit"
 	                />
 	            <Button android:id="@+id/Menu_ButtonCreate"
 	                style="@style/HomeButton"
 	                android:text="@string/dashboard_create"
-	                android:drawableTop="@drawable/create"/>
+	                android:focusable="true"
+	                android:drawableTop="@drawable/create"
+	                android:nextFocusRight="@+id/Menu_ButtonSearch"
+	                android:nextFocusLeft="@+id/Menu_ButtonBrowse"/>
 	        </LinearLayout>
 	
 	        <LinearLayout
@@ -50,11 +59,16 @@
 	            <Button android:id="@+id/Menu_ButtonSearch"
 	                style="@style/HomeButton"
 	                android:text="@string/dashboard_search"
-	                android:drawableTop="@drawable/search"/>
+	                android:drawableTop="@drawable/search"
+	                android:focusable="true"
+	                android:nextFocusRight="@+id/Menu_ButtonAbout"
+	                android:nextFocusLeft="@+id/Menu_ButtonCreate"/>
 	            <Button android:id="@+id/Menu_ButtonAbout"
 	                style="@style/HomeButton"
 	                android:text="@string/dashboard_about"
-	                android:drawableTop="@drawable/about"/>
+	                android:drawableTop="@drawable/about"
+	                android:nextFocusRight="@+id/Menu_ButtonExit"
+	                android:nextFocusLeft="@+id/Menu_ButtonSearch"/>
 	        </LinearLayout>
 	
 	        <LinearLayout
@@ -65,7 +79,9 @@
 	            <Button android:id="@+id/Menu_ButtonExit"
 	                style="@style/HomeButton"
 	                android:text="@string/dashboard_signout"
-	                android:drawableTop="@drawable/signout"/>
+	                android:drawableTop="@drawable/signout"
+	                android:nextFocusRight="@+id/Menu_ButtonBrowse"
+	                android:nextFocusLeft="@+id/Menu_ButtonAbout"/>
 	            <Button android:id="@+id/action_six_button"
 	                style="@style/HomeButton"
 	                android:text="@string/dashboard_action"

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.app.Instrumentation;
 import android.content.Intent;
 import android.gesture.Gesture;
 import android.gesture.GestureLibraries;
@@ -23,16 +24,20 @@ import android.view.Window;
 import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class Menu extends Activity implements OnInitListener{
 	
-	Button btnCreate;
-	Button btnAbout;
-	Button btnBrowse;
-	Button btnExit;
-	Button btnSearch;
-	GestureLibrary mLibrary;
+	private Button btnCreate;
+	private Button btnAbout;
+	private Button btnBrowse;
+	private Button btnExit;
+	private Button btnSearch;
+	private GestureOverlayView gestures;
+	private GestureLibrary mLibrary;
+	String currentFocus ="";
+	int leftright=0;
 	private int MY_DATA_CHECK_CODE = 0;
 	private TextToSpeech tts;
 	/** Called when the activity is first created. */
@@ -40,29 +45,8 @@ public class Menu extends Activity implements OnInitListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.dashboard);
-        
-        //Gesture        
-        mLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures);
-        if (!mLibrary.load()) {
-            finish();
-        }
-        GestureOverlayView gestures = (GestureOverlayView) findViewById(R.id.Menu_gestures);
-        gestures.addOnGesturePerformedListener(new OnGesturePerformedListener(){
-			@Override
-			public void onGesturePerformed(GestureOverlayView overlay,Gesture gesture) {
-				ArrayList<Prediction> predictions = mLibrary.recognize(gesture);
-			    if (predictions.size() > 0 && predictions.get(0).score > 1.0) {
-			        String action = predictions.get(0).name;
-			        if ("left_right".equals(action)) {
-			            Toast.makeText(Menu.this, "Left_Right", Toast.LENGTH_SHORT).show();
-			        } else if ("right_left".equals(action)) {
-			            Toast.makeText(Menu.this, "Right_Left", Toast.LENGTH_SHORT).show();
-			        } 
-			    }
-			}        	
-        });
-        //End Gesture
+        setContentView(R.layout.dashboard);        
+       
        btnBrowse = (Button)this.findViewById(R.id.Menu_ButtonBrowse);
        btnBrowse.setOnClickListener(new OnClickListener() {
        	@Override
@@ -107,13 +91,13 @@ public class Menu extends Activity implements OnInitListener{
    	  tts = new TextToSpeech(this, this);
      //Select Browse
        btnBrowse.setOnFocusChangeListener(new OnFocusChangeListener(){
-
 			@Override
 			public void onFocusChange(View arg0, boolean gainFocus) {
 				if(gainFocus){
 					String speech1 = "Browse";
 			    	tts.setLanguage(Locale.US);
 			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+			    	currentFocus="browse";
 				}
 			}
        	
@@ -126,6 +110,7 @@ public class Menu extends Activity implements OnInitListener{
 					String speech1 = "Create Flashcard";
 			    	tts.setLanguage(Locale.US);
 			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+			    	currentFocus="create";
 				}
 			}
        });
@@ -137,6 +122,7 @@ public class Menu extends Activity implements OnInitListener{
 					String speech1 = "Search Flashcards";
 			    	tts.setLanguage(Locale.US);
 			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+			    	currentFocus="search";
 				}
 			}
        });
@@ -148,6 +134,7 @@ public class Menu extends Activity implements OnInitListener{
 					String speech1 = "About us";
 			    	tts.setLanguage(Locale.US);
 			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+			    	currentFocus="about";
 				}
 			}
        });
@@ -159,9 +146,59 @@ public class Menu extends Activity implements OnInitListener{
 					String speech1 = "Sign Out";
 			    	tts.setLanguage(Locale.US);
 			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
+			    	currentFocus="signout";
 				}
 			}       	
        });
+       
+       
+       //Gesture   
+       mLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures);
+       if (!mLibrary.load()) {
+           finish();
+       }
+       gestures = (GestureOverlayView) findViewById(R.id.Menu_gestures);
+       gestures.addOnGesturePerformedListener(new OnGesturePerformedListener(){
+			@Override
+			public void onGesturePerformed(GestureOverlayView overlay,Gesture gesture) {
+				ArrayList<Prediction> predictions = mLibrary.recognize(gesture);
+			    if (predictions.size() > 0 && predictions.get(0).score > 1.0) {
+			        String action = predictions.get(0).name;
+			        if ("left_right".equals(action)) {
+			        	for(int i = 0; i<((leftright % 5)+1);i++){
+				            functions.InjectKeys(android.view.KeyEvent.KEYCODE_DPAD_RIGHT);
+			        	}
+			        	leftright++;
+			        } else if ("right_left".equals(action)) {
+			        	if(leftright>0){
+			        		leftright--;
+			        	}
+			        	else{
+			        		leftright=4;
+			        	}
+			        	for(int i = 0; i<((leftright % 5)+1);i++){
+				            functions.InjectKeys(android.view.KeyEvent.KEYCODE_DPAD_RIGHT);
+			        	}
+			            System.out.println(currentFocus);
+			        } 
+			        else if ("click".equals(action)) {
+			        	if(leftright % 5==0){
+			        		for(int i = 0; i<5;i++){
+					            functions.InjectKeys(android.view.KeyEvent.KEYCODE_DPAD_RIGHT);
+				        	}
+			        	}
+			        	else{
+				        	for(int i = 0; i<((leftright % 5));i++){
+					            functions.InjectKeys(android.view.KeyEvent.KEYCODE_DPAD_RIGHT);
+				        	}
+			        	}
+			        	functions.InjectKeys(android.view.KeyEvent.KEYCODE_DPAD_CENTER);
+			        }
+			    }
+			}        	
+       });
+     //End Gesture
+       
     }
     
     public void startCreate(){
@@ -178,4 +215,5 @@ public class Menu extends Activity implements OnInitListener{
     @Override
     public void onInit(int arg0) {
     }
+    
 }
