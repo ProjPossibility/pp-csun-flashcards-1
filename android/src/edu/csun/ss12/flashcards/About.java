@@ -22,7 +22,11 @@ public class About extends Activity implements OnInitListener {
         setContentView(R.layout.about);
         
         text = (TextView) findViewById(R.id.About_text);
-        text.setText("ABCCBBCBCBC");
+        text.setText("Flashcard App for Android \n" +
+        		"Created by CSUN team for SS12 \n\n" +
+        		"Tips: \n" +
+        		"In Browse, tap on item will load back of the card, long tap will make the app read card. \n" +
+        		"When viewing the flashcard, the app will read the flashcard with single tap, long tap is for modifying the flashcard.");
         
         //Text-to-Speech
         Intent checkIntent = new Intent();

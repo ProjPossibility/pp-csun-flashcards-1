@@ -9,7 +9,7 @@ public class Flashcard  {
 	private String mGroup;
 	private String mBack;
 	private String mFront;
-	private int mOriginal_Index = -1 ; //Use for Search 
+	private int mOriginal_Index = -1 ; //Use for Searching 
 	/**
 	 * @return the mGroup
 	 */

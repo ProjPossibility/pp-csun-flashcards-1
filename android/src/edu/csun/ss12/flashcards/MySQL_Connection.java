@@ -30,7 +30,7 @@ public class MySQL_Connection {
 
 
 public  String[] getLogin(String user_name) {
-	String returnString = "http://calqlus.org/ss12/get_User_Id.php";
+	String returnString = "http://calqlus.org/ss12/android_Login.php";
    String[] returnArray = new String[3]; 
    InputStream is = null;
     
