@@ -1,84 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent" 
-  android:orientation="vertical"
-  android:background="#DFDFDF">
-  <LinearLayout style="@style/TitleBar" >
-        <ImageView style="@style/TitleBarLogo"
-            android:contentDescription="@string/description_logo"
-            android:src="@drawable/logo" 
-            android:layout_weight="1" android:paddingRight="100dp"/>  
-    </LinearLayout>
-    <ScrollView
+<android.gesture.GestureOverlayView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Register_gestures"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"    
+    android:gestureStrokeType="multiple"
+    android:eventsInterceptionEnabled="true"
+    android:orientation="vertical"    
+		>
+	<LinearLayout
+	  xmlns:android="http://schemas.android.com/apk/res/android"
 	  android:layout_width="fill_parent"
-	  android:layout_height="fill_parent">
-	  <LinearLayout
-		  	android:layout_width="fill_parent"
-		  	android:layout_height="fill_parent" android:orientation="vertical">
-			<TextView 
-				android:layout_height="wrap_content" 
-				android:text="Create Account" 
-				android:id="@+id/Register_TextView01"
-				android:textColor="#000000" 
-				android:textSize="@dimen/text_size_large" 
-				android:paddingBottom="10dp" 
-				android:gravity="center_vertical|center_horizontal" android:layout_width="fill_parent">
-				</TextView>
-			<View 	
-				android:background="@drawable/divider_gradient"
-				android:layout_width="fill_parent"
-				android:layout_height="1dp"
-				android:layout_below="@+id/Register_TextView02"/>
-			<TextView 
-				android:layout_width="wrap_content" 
-				android:layout_height="wrap_content" 
-				android:text="User Name:" 
-				android:id="@+id/Register_TextView02" 
-				android:textColor="#000000" 
-				android:textSize="@dimen/text_size_medium"></TextView>
-			<EditText 
-				android:layout_height="wrap_content" 
-				android:layout_width="fill_parent" 
-				android:id="@+id/Register_EditTextUserName" ></EditText>
-			<TextView 
-				android:layout_width="wrap_content" 
-				android:layout_height="wrap_content" 
-				android:text="Password:" 
-				android:id="@+id/Register_TextView03" 
-				android:textColor="#000000" 
-				android:textSize="@dimen/text_size_medium"></TextView>			
-			<EditText 
-				android:layout_height="wrap_content" 
-				android:layout_width="fill_parent" 
-				android:id="@+id/Register_EditTextPassword" ></EditText>
-			<LinearLayout 
-					android:layout_width="match_parent" 
+	  android:layout_height="fill_parent" 
+	  android:orientation="vertical"
+	  android:background="#DFDFDF">
+	  <LinearLayout style="@style/TitleBar" >
+	        <ImageView style="@style/TitleBarLogo"
+	            android:contentDescription="@string/description_logo"
+	            android:src="@drawable/logo" 
+	            android:layout_weight="1" android:paddingRight="100dp"/>  
+	    </LinearLayout>
+	    <ScrollView
+		  android:layout_width="fill_parent"
+		  android:layout_height="fill_parent">
+		  <LinearLayout
+			  	android:layout_width="fill_parent"
+			  	android:layout_height="fill_parent" android:orientation="vertical">
+				<TextView 
 					android:layout_height="wrap_content" 
-					android:paddingTop="10dp">
-				<Button android:layout_height="wrap_content" 
-					android:text="R" 
-					android:layout_width="wrap_content"							
-					android:visibility="invisible"></Button>
-				<Button android:layout_height="wrap_content" 
-					android:text="R" 
-					android:layout_width="wrap_content"							
-					android:visibility="invisible"
-					android:layout_weight="1"></Button>
-				<Button 
 					android:text="Create Account" 
+					android:id="@+id/Register_TextView01"
+					android:textColor="#000000" 
+					android:textSize="@dimen/text_size_large" 
+					android:paddingBottom="10dp" 
+					android:gravity="center_vertical|center_horizontal" android:layout_width="fill_parent">
+					</TextView>
+				<View 	
+					android:background="@drawable/divider_gradient"
+					android:layout_width="fill_parent"
+					android:layout_height="1dp"
+					android:layout_below="@+id/Register_TextView02"/>
+				<TextView 
+					android:layout_width="wrap_content" 
 					android:layout_height="wrap_content" 
-					android:id="@+id/Register_ButtonCreate" 
-					android:layout_width="wrap_content"					
-					android:textColor = "#ffffff"
-					android:background="@drawable/custom_button"							
-					android:layout_weight="1"></Button>
-				<Button android:layout_height="wrap_content" 
-					android:text="R" 
-					android:layout_width="wrap_content"							
-					android:visibility="invisible"></Button>
-				</LinearLayout>
-		</LinearLayout>
-	</ScrollView>
-</LinearLayout>
+					android:text="User Name:" 
+					android:id="@+id/Register_TextView02" 
+					android:textColor="#000000" 
+					android:textSize="@dimen/text_size_medium"></TextView>
+				<EditText 
+					android:layout_height="wrap_content" 
+					android:layout_width="fill_parent" 
+					android:id="@+id/Register_EditTextUserName" ></EditText>
+				<TextView 
+					android:layout_width="wrap_content" 
+					android:layout_height="wrap_content" 
+					android:text="Password:" 
+					android:id="@+id/Register_TextView03" 
+					android:textColor="#000000" 
+					android:textSize="@dimen/text_size_medium"></TextView>			
+				<EditText 
+					android:layout_height="wrap_content" 
+					android:layout_width="fill_parent" 
+					android:id="@+id/Register_EditTextPassword" ></EditText>
+				<LinearLayout 
+						android:layout_width="match_parent" 
+						android:layout_height="wrap_content" 
+						android:paddingTop="10dp">
+					<Button android:layout_height="wrap_content" 
+						android:text="R" 
+						android:layout_width="wrap_content"							
+						android:visibility="invisible"></Button>
+					<Button android:layout_height="wrap_content" 
+						android:text="R" 
+						android:layout_width="wrap_content"							
+						android:visibility="invisible"
+						android:layout_weight="1"></Button>
+					<Button 
+						android:text="Create Account" 
+						android:layout_height="wrap_content" 
+						android:id="@+id/Register_ButtonCreate" 
+						android:layout_width="wrap_content"					
+						android:textColor = "#ffffff"
+						android:background="@drawable/custom_button"							
+						android:layout_weight="1"></Button>
+					<Button android:layout_height="wrap_content" 
+						android:text="R" 
+						android:layout_width="wrap_content"							
+						android:visibility="invisible"></Button>
+					</LinearLayout>
+			</LinearLayout>
+		</ScrollView>
+	</LinearLayout>
+</android.gesture.GestureOverlayView>

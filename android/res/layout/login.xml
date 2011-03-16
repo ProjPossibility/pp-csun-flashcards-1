@@ -1,73 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.gesture.GestureOverlayView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Login_gestures"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#DFDFDF">
-    <LinearLayout style="@style/TitleBar" >
-        <ImageView style="@style/TitleBarLogo"
-            android:contentDescription="@string/description_logo"
-            android:src="@drawable/logo" 
-            android:layout_weight="1" android:paddingRight="100dp"/>  
-    </LinearLayout>
-
-<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextViewLogin" android:text="User Name:" android:textColor="#000000" android:textSize="@dimen/text_size_medium"></TextView>
-<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Login_EditTextUserName"></EditText>
-<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextViewPassword" android:text="Password:" android:textColor="#000000" android:textSize="@dimen/text_size_medium"></TextView>
-<EditText android:layout_height="wrap_content" android:password="true" android:layout_width="fill_parent" android:id="@+id/Login_EditTextPassword"></EditText>
-<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Remember Account Info" android:id="@+id/Login_CheckBoxSaveAccountInfo" android:textColor="#000000" android:textSize="@dimen/text_size_medium"></CheckBox>
-
-<TableLayout android:id="@+id/row2"
+    android:layout_height="fill_parent"    
+    android:gestureStrokeType="multiple"
+    android:eventsInterceptionEnabled="true"
+    android:orientation="vertical"    
+	>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:orientation="vertical"
 	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content">
-		<TableRow 
-				android:layout_weight="1" 
-				android:paddingTop="5dp"
-				android:paddingBottom="5dp">>	
-				<TextView 	android:text = " " 
-							android:layout_height="wrap_content"/>			
-				<Button  
-						android:text="Sign In"
-						android:textColor = "#ffffff"
-						android:id="@+id/Login_ButtonLogin"
-						android:layout_weight="1"
-						android:background="@drawable/custom_button" 
-						android:layout_height="wrap_content"
-						android:layout_width="fill_parent" >						
-						</Button>	
-		</TableRow>
-		<TableRow  
-				android:layout_weight="1" 
-				android:paddingTop="5dp"				 
-				android:paddingBottom="5dp">									
-				<TextView 	android:text=" " 
+	    android:layout_height="fill_parent"
+	    android:background="#DFDFDF">
+	    <LinearLayout style="@style/TitleBar" >
+	        <ImageView style="@style/TitleBarLogo"
+	            android:contentDescription="@string/description_logo"
+	            android:src="@drawable/logo" 
+	            android:layout_weight="1" android:paddingRight="100dp"/>  
+	    </LinearLayout>
+	
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextViewLogin" android:text="User Name:" android:textColor="#000000" android:textSize="@dimen/text_size_medium"></TextView>
+	<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/Login_EditTextUserName" android:nextFocusDown="@+id/Login_EditTextPassword"></EditText>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextViewPassword" android:text="Password:" android:textColor="#000000" android:textSize="@dimen/text_size_medium"></TextView>
+	<EditText android:layout_height="wrap_content" android:password="true" android:layout_width="fill_parent" android:id="@+id/Login_EditTextPassword" android:nextFocusDown="@+id/Login_CheckBoxSaveAccountInfo"></EditText>
+	<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Remember Account Info" android:id="@+id/Login_CheckBoxSaveAccountInfo" android:textColor="#000000" android:textSize="@dimen/text_size_medium" android:nextFocusDown="@+id/Login_ButtonLogin"></CheckBox>
+	
+	<TableLayout android:id="@+id/row2"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content">
+			<TableRow 
+					android:layout_weight="1" 
+					android:paddingTop="5dp"
+					android:paddingBottom="5dp">>	
+					<TextView 	android:text = " " 
+								android:layout_height="wrap_content"/>			
+					<Button  
+							android:text="Sign In"
+							android:textColor = "#ffffff"
+							android:id="@+id/Login_ButtonLogin"
+							android:layout_weight="1"
+							android:background="@drawable/custom_button" 
 							android:layout_height="wrap_content"
-							android:paddingRight="100dp"/>
-				<Button 
-						android:textColor = "#ffffff"
-						android:layout_width="fill_parent" 
-						android:layout_height="wrap_content" 
-						android:text="Register" 
-						android:id="@+id/Login_ButtonRegister"
-						android:layout_weight="1"
-						android:background="@drawable/custom_button">
-						</Button>
-		</TableRow>
-		<TableRow  
-				android:layout_weight="1" 
-				android:paddingTop="5dp" 
-				android:paddingBottom="5dp">
-				<TextView 	android:text=" " 
-							android:layout_height="wrap_content"/>
-				<Button 
-						android:textColor = "#ffffff"
-						android:layout_height="wrap_content" 
-						android:text="Exit" 
-						android:layout_width="fill_parent" 
-						android:id="@+id/Login_ButtonExit"
-						android:layout_weight="1"
-						android:background="@drawable/custom_button" >
-						</Button>
-		</TableRow>
-</TableLayout>
-</LinearLayout>
+							android:layout_width="fill_parent" android:nextFocusDown="@+id/Login_ButtonRegister">						
+							</Button>	
+			</TableRow>
+			<TableRow  
+					android:layout_weight="1" 
+					android:paddingTop="5dp"				 
+					android:paddingBottom="5dp">									
+					<TextView 	android:text=" " 
+								android:layout_height="wrap_content"
+								android:paddingRight="100dp"/>
+					<Button 
+							android:textColor = "#ffffff"
+							android:layout_width="fill_parent" 
+							android:layout_height="wrap_content" 
+							android:text="Register" 
+							android:id="@+id/Login_ButtonRegister"
+							android:layout_weight="1"
+							android:background="@drawable/custom_button" android:nextFocusDown="@+id/Login_ButtonExit">
+							</Button>
+			</TableRow>
+			<TableRow  
+					android:layout_weight="1" 
+					android:paddingTop="5dp" 
+					android:paddingBottom="5dp">
+					<TextView 	android:text=" " 
+								android:layout_height="wrap_content"/>
+					<Button 
+							android:textColor = "#ffffff"
+							android:layout_height="wrap_content" 
+							android:text="Exit" 
+							android:layout_width="fill_parent" 
+							android:id="@+id/Login_ButtonExit"
+							android:layout_weight="1"
+							android:background="@drawable/custom_button" >
+							</Button>
+			</TableRow>
+	</TableLayout>
+	</LinearLayout>
+</android.gesture.GestureOverlayView>

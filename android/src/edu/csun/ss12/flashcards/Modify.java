@@ -20,6 +20,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.gesture.Gesture;
+import android.gesture.GestureLibraries;
+import android.gesture.GestureLibrary;
+import android.gesture.GestureOverlayView;
+import android.gesture.Prediction;
+import android.gesture.GestureOverlayView.OnGesturePerformedListener;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -62,7 +68,10 @@ public class Modify extends Activity implements OnInitListener {
     ArrayList<Flashcard> mFlashcardArray = new ArrayList<Flashcard>();
     String mFlashcardFront ;
 	String mFlashcardBack ;
-    
+
+    private GestureOverlayView gestures;
+	private GestureLibrary mLibrary;
+	int counter=0;
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -233,6 +242,58 @@ public class Modify extends Activity implements OnInitListener {
    				}
    			}          	
           });
+     	//Gesture   
+        mLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures);
+        if (!mLibrary.load()) {
+            finish();
+        }
+        gestures = (GestureOverlayView) findViewById(R.id.Modify_gestures);
+        gestures.addOnGesturePerformedListener(new OnGesturePerformedListener(){
+ 			@Override
+ 			public void onGesturePerformed(GestureOverlayView overlay,Gesture gesture) {
+ 				ArrayList<Prediction> predictions = mLibrary.recognize(gesture);
+ 			    if (predictions.size() > 0 && predictions.get(0).score > 1.0) {
+ 			        String action = predictions.get(0).name;
+ 			        if ("left_right".equals(action)) {
+ 			        	if(counter%6==0||counter%6==1){
+ 			        		functions.InjectKeys(android.view.KeyEvent.KEYCODE_DPAD_DOWN);
+ 			        	}
+ 			        	else
+ 			        	{
+	 			        	for(int i = 0; i<((counter % 6)+2);i++){
+	 				            functions.InjectKeys(android.view.KeyEvent.KEYCODE_DPAD_DOWN);
+	 			        	}
+ 			        	}
+ 			        	System.out.println(counter);
+ 			        	counter++; 			        	
+ 			        } else if ("right_left".equals(action)) {
+ 			        	if(counter>0){
+ 			        		counter--;
+ 			        	}
+ 			        	else{
+ 			        		counter=5;
+ 			        	}
+ 			        	for(int i = 0; i<((counter %6));i++){
+ 				            functions.InjectKeys(android.view.KeyEvent.KEYCODE_DPAD_DOWN);
+ 			        	}
+ 			        } 
+ 			        else if ("click".equals(action)) {
+ 			        	if(counter % 6==0){
+ 			        		for(int i = 0; i<6;i++){
+ 					            functions.InjectKeys(android.view.KeyEvent.KEYCODE_DPAD_DOWN);
+ 				        	}
+ 			        	}
+ 			        	else{
+ 				        	for(int i = 0; i<((counter % 6));i++){
+ 					            functions.InjectKeys(android.view.KeyEvent.KEYCODE_DPAD_DOWN);
+ 				        	}
+ 			        	}
+ 			        	functions.InjectKeys(android.view.KeyEvent.KEYCODE_DPAD_CENTER);
+ 			        }
+ 			    }
+ 			}        	
+        });
+      //End Gesture
     }
     @Override
     public void onInit(int arg0) {

@@ -20,6 +20,7 @@
 	<activity android:label="@string/app_name" android:name=".DynamicFlashcard"></activity>
 	<activity android:label="@string/app_name" android:name=".Modify"></activity>
 	<activity android:label="@string/app_name" android:name=".Search"></activity>
+	<activity android:label="@string/app_name" android:name=".About"></activity>
 	</application>
      <!-- Declares the input method service -->
         <service android:name="FastInputIME"

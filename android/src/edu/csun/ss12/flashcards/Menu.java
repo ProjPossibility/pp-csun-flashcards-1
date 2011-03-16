@@ -36,7 +36,6 @@ public class Menu extends Activity implements OnInitListener{
 	private Button btnSearch;
 	private GestureOverlayView gestures;
 	private GestureLibrary mLibrary;
-	String currentFocus ="";
 	int leftright=0;
 	private int MY_DATA_CHECK_CODE = 0;
 	private TextToSpeech tts;
@@ -81,7 +80,7 @@ public class Menu extends Activity implements OnInitListener{
        btnAbout.setOnClickListener(new OnClickListener() {
        	@Override
        	public void onClick(View v) {
-       		//ToDo :  
+       		startAbout();
        	}
        });
      //Text-to-Speech
@@ -97,7 +96,6 @@ public class Menu extends Activity implements OnInitListener{
 					String speech1 = "Browse";
 			    	tts.setLanguage(Locale.US);
 			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
-			    	currentFocus="browse";
 				}
 			}
        	
@@ -110,7 +108,6 @@ public class Menu extends Activity implements OnInitListener{
 					String speech1 = "Create Flashcard";
 			    	tts.setLanguage(Locale.US);
 			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
-			    	currentFocus="create";
 				}
 			}
        });
@@ -122,7 +119,6 @@ public class Menu extends Activity implements OnInitListener{
 					String speech1 = "Search Flashcards";
 			    	tts.setLanguage(Locale.US);
 			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
-			    	currentFocus="search";
 				}
 			}
        });
@@ -134,7 +130,6 @@ public class Menu extends Activity implements OnInitListener{
 					String speech1 = "About us";
 			    	tts.setLanguage(Locale.US);
 			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
-			    	currentFocus="about";
 				}
 			}
        });
@@ -146,7 +141,6 @@ public class Menu extends Activity implements OnInitListener{
 					String speech1 = "Sign Out";
 			    	tts.setLanguage(Locale.US);
 			    	tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
-			    	currentFocus="signout";
 				}
 			}       	
        });
@@ -179,7 +173,6 @@ public class Menu extends Activity implements OnInitListener{
 			        	for(int i = 0; i<((leftright % 5)+1);i++){
 				            functions.InjectKeys(android.view.KeyEvent.KEYCODE_DPAD_RIGHT);
 			        	}
-			            System.out.println(currentFocus);
 			        } 
 			        else if ("click".equals(action)) {
 			        	if(leftright % 5==0){
@@ -211,6 +204,10 @@ public class Menu extends Activity implements OnInitListener{
     
     public void startSearch(){
     	this.startActivity(new Intent(getBaseContext(), Search.class));
+    }
+    
+    public void startAbout(){
+    	this.startActivity(new Intent(getBaseContext(), About.class));
     }
     @Override
     public void onInit(int arg0) {
