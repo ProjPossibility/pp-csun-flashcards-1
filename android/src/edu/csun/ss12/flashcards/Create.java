@@ -34,7 +34,7 @@ import android.widget.Toast;
 
 public class Create extends Activity implements OnInitListener {
 
-	private static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
+	
 	Spinner spGroups;
 	EditText textFront;
 	EditText textBack;
@@ -43,7 +43,6 @@ public class Create extends Activity implements OnInitListener {
 	Button btnReset;
 	Button btnSpeak;
 	private int mUserId;
-	private int MY_DATA_CHECK_CODE = 0;
 	private TextToSpeech tts;
 	final String PREFERENCES = "FlashcardPreferences";
     SharedPreferences preferences;
@@ -57,12 +56,16 @@ public class Create extends Activity implements OnInitListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.create);
         
+        /////////////////////////
         //Text-to-Speech
+        /////////////////////////
         Intent checkIntent = new Intent();
      	checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
      	startActivityForResult(checkIntent, 0);
-     	tts = new TextToSpeech(this, this);
-     	
+     	tts = new TextToSpeech(this, this);     	
+     	/////////////////////////
+        //End Text-to-Speech
+        /////////////////////////
         spGroups = (Spinner)this.findViewById(R.id.Create_SpinnerGroup);
         textGroup = (EditText)this.findViewById(R.id.Create_EditTextGroup);
         
@@ -84,44 +87,9 @@ public class Create extends Activity implements OnInitListener {
         mUserId = preferences.getInt("userId", 6);
         
         
-       /* spGroups.setOnItemSelectedListener(new OnItemSelectedListener(){
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
-				// TODO Auto-generated method stub
-				String speech1 = spGroups.getSelectedItem().toString();
-			    tts.setLanguage(Locale.US);
-			    tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
-			    
-		        String group = spGroups.getSelectedItem().toString();
-		        if (group.equals("Create Group"))
-		        	textGroup.setVisibility(0); //visible
-		        else {
-		        	textGroup.s group;
-		        	textGroup.setVisibility(8); // gone
-		            // textGroup.setVisibility(4); //invisible
-		        }
-		      //  setContentView(mScrollView);
-			}
-			
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
-				String speech1 = spGroups.getSelectedItem().toString();
-			    tts.setLanguage(Locale.US);
-			    tts.speak(speech1, TextToSpeech.QUEUE_FLUSH, null);
-			    
-		        String group = spGroups.getSelectedItem().toString();
-		        if (group.equals("Create Group"))
-		        	textGroup.setVisibility(0); //visible
-		        else {
-		        	textGroup.setVisibility(8); // gone
-		            // textGroup.setVisibility(4); //invisible
-		        }
-			}
-        });
-        
-        */
+       ////////////////////
+        //On click Creat Button: Get data from Group, Front, Back, and send it to server. If success, show the toast and say " Create Successfully
+        ///////////////////////
         btnCreate.setOnClickListener(new OnClickListener() {
         	@Override
         	public void onClick(View v) {
@@ -141,7 +109,13 @@ public class Create extends Activity implements OnInitListener {
         		}
         	}
         });
+        //////////////////////
+        /// End On Click Create Button
+        //////////////////////
         
+        //////////////////////
+        /// On Click Reset Button : reset all field to empty
+        //////////////////////
         btnReset.setOnClickListener(new OnClickListener() {
         	@Override
         	public void onClick(View v) {
@@ -150,7 +124,9 @@ public class Create extends Activity implements OnInitListener {
         		textBack.setText(""); 
         	}
         });
-
+        //////////////////////
+        /// End On Click Reset Button
+        //////////////////////
      	  
      	//Select Group
      	 textGroup.setOnFocusChangeListener(new OnFocusChangeListener(){

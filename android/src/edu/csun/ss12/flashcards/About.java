@@ -10,6 +10,11 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.view.Window;
 import android.widget.TextView;
 
+/***
+ * About Activity: About us
+ * @author hung
+ *
+ */
 public class About extends Activity implements OnInitListener {
 	
 	TextView text ;

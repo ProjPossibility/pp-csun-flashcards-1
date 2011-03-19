@@ -39,8 +39,14 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+/***
+ * Browse Activity: Download all flashcards of the user and display the front of the card
+ * @author hung
+ *
+ */
 public class Browse extends Activity implements OnInitListener {
 
+	boolean rowColor = true;
 	TextView mFront;
 	TextView mBack;
 	ScrollView mScrollView;
@@ -62,17 +68,18 @@ public class Browse extends Activity implements OnInitListener {
     public void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        // setContentView(R.layout.browse);
-         // initialize text
-         //mFront = (TextView)this.findViewById(R.id.Browse_TextViewFront);
         
-        
+        ////////////////
         //Text-to-Speech
+        ///////////////
         Intent checkIntent = new Intent();
      	checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
      	startActivityForResult(checkIntent, 0);
      	tts = new TextToSpeech(this, this);
-        
+        ///////////////////
+     	//End Text-To-Speech
+     	///////////////////
+     	
      	///////////////
      	//Layout
      	///////////////
@@ -88,7 +95,7 @@ public class Browse extends Activity implements OnInitListener {
 		///End Layout
 		////////////
 		
-		boolean rowColor = true;
+
 		//////////////////////
 		//Get data form server
 		//////////////////////
@@ -146,7 +153,14 @@ public class Browse extends Activity implements OnInitListener {
 	        };
 		      mDynamicFlashcard.setText(Html.fromHtml(mFlashcardFront, imgGetter, null));
 		      mDynamicFlashcard.setPadding(7, 7, 7, 7);
-
+		    //////////////////////
+		    //End Get data form server
+		    //////////////////////
+		      
+		    //////////////////////
+			//Color of the row
+			//////////////////////
+			
 		      if(rowColor==true){
 					mDynamicFlashcard.setBackgroundColor(Color.BLACK);
 					rowColor=false;
@@ -154,7 +168,13 @@ public class Browse extends Activity implements OnInitListener {
 					mDynamicFlashcard.setBackgroundColor(Color.GRAY);
 					rowColor=true;
 				}
-				
+		      //////////////////////
+		      //End Color of the row
+		      //////////////////////	
+		      
+		      //////////////////////
+		      //Long Click: When long click on a row, the content of the row will be read
+		      //////////////////////
 				mDynamicFlashcard.setOnLongClickListener(new OnLongClickListener() {
 					@Override
 					public boolean onLongClick(View v) {
@@ -164,11 +184,16 @@ public class Browse extends Activity implements OnInitListener {
 				    	tts.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
 						return true;
 					}});
+				//////////////////////
+			    //End Long Click
+			    //////////////////////
 				
+				//////////////////////
+			    //Click: When click on a row, Front and Back of the flashcard will be shown
+			    //////////////////////
 				mDynamicFlashcard.setOnClickListener(new OnClickListener() {
 					@Override
 		        	public void onClick(View v) {
-		        		// TODO display card
 				        SharedPreferences preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
 				        final SharedPreferences.Editor editor = preferences.edit();
 				        String front = mFlashcardArray.get(v.getId()).getmFront();
@@ -185,7 +210,11 @@ public class Browse extends Activity implements OnInitListener {
 				    	startActivity(new Intent(getBaseContext(), DynamicFlashcard.class));
 		        	}
 		        });
+				//////////////////////
+			    //End Click
+			    //////////////////////
 				
+				//Draw the layout to screen
 				mLinearLayout.addView(mDynamicFlashcard);
 	        
 	        } catch (JSONException e) {
