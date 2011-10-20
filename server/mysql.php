@@ -4,6 +4,6 @@
 
 //mysql info
 $mysql_user = 'victor';
-$mysql_pass = 'Dr5q33yVSumme4Ry';
+$mysql_pass = 'ffffffffffffffffff';
 
 ?>
